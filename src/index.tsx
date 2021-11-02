@@ -1,8 +1,7 @@
-import * as React from "react";
 import { render } from "react-dom";
-import HasuraGraphiQL from "./component/HasuraGraphiQL";
+import HasuraGraphiQL from "./HasuraGraphiQL";
 
-import "./styles.css";
+import "./index.css";
 
 const container = document.getElementById("root");
 

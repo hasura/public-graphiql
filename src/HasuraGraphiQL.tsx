@@ -1,30 +1,51 @@
 import * as React from "react";
 import GraphiQL from "graphiql";
 import GraphiQLExplorer from "graphiql-explorer";
-import { buildClientSchema, getIntrospectionQuery } from "graphql";
+import {
+  buildClientSchema,
+  getIntrospectionQuery,
+  GraphQLSchema,
+} from "graphql";
 
 import "graphiql/graphiql.css";
 
-const defaultHeaders = [[true, "Content-Type", "application/json"]];
+const defaultHeaders: [boolean, string, string][] = [
+  [true, "Content-Type", "application/json"],
+  [
+    true,
+    "x-hasura-admin-secret",
+    "q3qsst5kj9xwYg7nvJw73uX0TgvSObwcNqjj0vcGaB89AX5pxvsFshvgxidV5l9j",
+  ],
+];
 
-function transformHeaders(headers) {
-  let res = {};
-  for (let header of headers) if (header[0]) res[header[1]] = header[2];
+function transformHeaders(headers: [boolean, string, string][]) {
+  let res = {} as Record<string, any>;
+  for (let header of headers)
+    if (header[0]) res[header[1] as unknown as string] = header[2];
   return res;
 }
 
-function edited2DArray(arr, row, col, val) {
-  let res = arr.slice().map((e) => e.slice());
+function edited2DArray(
+  arr: [boolean, string, string][],
+  row: number,
+  col: number,
+  val: string | boolean
+): [boolean, string, string][] {
+  let res = arr.slice();
   res[row][col] = val;
   return res;
 }
 
 export default function HasuraGraphiQL() {
   const [loading, setLoading] = React.useState(true);
-  const [schema, setSchema] = React.useState(null);
-  const [url, setUrl] = React.useState("");
-  const [urlInput, setUrlInput] = React.useState("");
-  const [query, setQuery] = React.useState("");
+  const [schema, setSchema] = React.useState<GraphQLSchema | null>(null);
+  const [url, setUrl] = React.useState(
+    "https://thankful-beetle-75.hasura.app/v1/graphql"
+  );
+  const [urlInput, setUrlInput] = React.useState(
+    "https://thankful-beetle-75.hasura.app/v1/graphql"
+  );
+  const [query, setQuery] = React.useState<string | undefined>("");
   const [headers, setHeaders] = React.useState(defaultHeaders);
   const [headersInput, setHeadersInput] = React.useState(defaultHeaders);
 
@@ -36,7 +57,7 @@ export default function HasuraGraphiQL() {
     }
   };
 
-  function graphQLFetcher(graphQLParams) {
+  function graphQLFetcher(graphQLParams: Record<string, any>) {
     return fetch(url, {
       method: "post",
       headers: transformHeaders(headers),
@@ -68,12 +89,12 @@ export default function HasuraGraphiQL() {
   }, [schema, headers, url, loading]);
 
   return (
-    <div id="wrapper" style={{ height: "50vh", margin: "1rem" }}>
+    <div id="wrapper" className="h-56 m-5">
       <div>
         <svg width="12" height="9">
           <path fill="#666" d="M 0 0 L 0 9 L 5.5 4.5 z"></path>
         </svg>
-        <div className="font-semibold">GraphQl Endpoint</div>
+        <div className="font-semibold">GraphQL Endpoint</div>
         <div className="flex mb-md">
           <div className="flex items-center w-full">
             <button
@@ -177,7 +198,7 @@ export default function HasuraGraphiQL() {
                   value={header[1]}
                 />
               </td>
-              <td colSpan="1" className="">
+              <td colSpan={1} className="">
                 <input
                   onBlur={updateHeaders}
                   onChange={(e) =>
@@ -196,7 +217,7 @@ export default function HasuraGraphiQL() {
                 <i
                   className="cursor-pointer mr-md fa fa-times"
                   onClick={() => {
-                    let result = headersInput.slice().map((r) => r.slice());
+                    let result = headersInput.slice();
                     result.splice(i, 1);
                     setHeadersInput(result);
                     setHeaders(result);
@@ -239,15 +260,15 @@ export default function HasuraGraphiQL() {
                   );
                   setTimeout(() =>
                     document
-                      .querySelector(
+                      .querySelector<HTMLElement>(
                         `[data-test-id=row-key-${headersInput.length}]`
                       )
-                      .focus()
+                      ?.focus()
                   );
                 }}
               />
             </td>
-            <td colSpan="2" className="border-t border-gray-200">
+            <td colSpan={2} className="border-t border-gray-200">
               <input
                 className="w-full border-0 focus:ring-0 focus:outline-none"
                 data-header-id="2"
@@ -262,10 +283,10 @@ export default function HasuraGraphiQL() {
                   );
                   setTimeout(() =>
                     document
-                      .querySelector(
+                      .querySelector<HTMLElement>(
                         `[data-test-id=row-value-${headersInput.length}]`
                       )
-                      .focus()
+                      ?.focus()
                   );
                 }}
               />
@@ -288,7 +309,7 @@ export default function HasuraGraphiQL() {
             <GraphiQLExplorer
               schema={schema}
               query={query}
-              onEdit={(q) => setQuery(q)}
+              onEdit={(q: string) => setQuery(q)}
               explorerIsOpen={true}
               onToggleExplorer={() => null}
               getDefaultScalarArgValue={null}
@@ -299,7 +320,6 @@ export default function HasuraGraphiQL() {
               fetcher={graphQLFetcher}
               query={query}
               onEditQuery={(q) => setQuery(q)}
-              variables={null}
             />
           </>
         )}

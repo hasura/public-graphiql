@@ -1,53 +1,67 @@
 {
-  "name": "@hasura/public-graphiql",
+  "name": "ts-tw-test",
   "version": "0.1.0",
-  "keywords": [],
-  "main": "src/index.js",
-  "homepage": "/public-graphiql",
-  "private": false,
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.4.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "graphiql": "^1.4.6",
+    "graphiql-explorer": "^0.6.3",
+    "graphql": "^15.5.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
     ]
   },
-  "files": ["dist/*.js", "dist/**/&.js"],
-  "dependencies": {
-    "graphiql": "latest",
-    "graphiql-explorer": "^0.6.3"
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "graphql": "15.x",
-    "prop-types": "15.7.2",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-scripts": "^3.4.1",
-    "@babel/cli": "^7.16.0",
-    "@babel/preset-react": "^7.16.0",
-    "@craco/craco": "^5.8.0",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^9.8.8",
     "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-    "typescript": "3.3.3"
-  },
-  "peerDependencies": {
-    "graphql": "15.x",
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x",
-    "react-scripts": "^3.x"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build:npm": "rm -rf dist && mkdir dist &&  babel src/component -d dist --copy-files",
-    "test": "craco test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+  }
 }
