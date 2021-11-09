@@ -345,7 +345,7 @@ export default function HasuraGraphiQL({
                   setTimeout(() =>
                     document
                       .querySelector<HTMLElement>(
-                        `[data-test-id=row-value-${headersInput.length}]`
+                        `[data-testid=row-value-${headersInput.length}]`
                       )
                       ?.focus()
                   );
