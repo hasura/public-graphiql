@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "@cypress/react";
-import HasuraGraphiQL from "./HasuraGraphiQL";
+import HasuraGraphiQL from "./lib/HasuraGraphiQL";
 
 function mockServerInit() {
   cy.intercept("POST", "https://hasura.io/graphql", (req) => {

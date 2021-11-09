@@ -1,5 +1,5 @@
 import { render } from "react-dom";
-import HasuraGraphiQL from "./HasuraGraphiQL";
+import HasuraGraphiQL from "./lib/HasuraGraphiQL";
 
 import "./index.css";
 

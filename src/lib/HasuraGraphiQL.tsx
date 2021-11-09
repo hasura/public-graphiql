@@ -20,6 +20,7 @@ import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
+import "./styles.css"
 
 export default function HasuraGraphiQL({
   defaultUrl = "",
