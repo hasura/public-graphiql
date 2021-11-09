@@ -6,68 +6,99 @@ import {
   getIntrospectionQuery,
   GraphQLSchema,
 } from "graphql";
+import CodeExporter from "graphiql-code-exporter";
+import snippets from "./snippets";
+import { createGraphiQLFetcher } from "@graphiql/toolkit";
+
+import {
+  transformHeaders,
+  untransformHeaders,
+  edited2DArray,
+  toggleCacheDirective,
+} from "./utils";
+import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
 
 import "graphiql/graphiql.css";
+import "graphiql-code-exporter/CodeExporter.css";
 
-const defaultHeaders: [boolean, string, string][] = [
-  [true, "Content-Type", "application/json"],
-  [
-    true,
-    "x-hasura-admin-secret",
-    "q3qsst5kj9xwYg7nvJw73uX0TgvSObwcNqjj0vcGaB89AX5pxvsFshvgxidV5l9j",
-  ],
-];
-
-function transformHeaders(headers: [boolean, string, string][]) {
-  let res = {} as Record<string, any>;
-  for (let header of headers)
-    if (header[0]) res[header[1] as unknown as string] = header[2];
-  return res;
-}
-
-function edited2DArray(
-  arr: [boolean, string, string][],
-  row: number,
-  col: number,
-  val: string | boolean
-): [boolean, string, string][] {
-  let res = arr.slice();
-  res[row][col] = val;
-  return res;
-}
-
-export default function HasuraGraphiQL() {
+export default function HasuraGraphiQL({
+  defaultUrl = "",
+  defaultSubscriptionUrl = "",
+  defaultHeaders = {},
+  defaultQuery = "",
+}: {
+  defaultUrl?: string;
+  defaultSubscriptionUrl?: string;
+  defaultHeaders?: Record<string, string>;
+  defaultQuery?: string;
+}) {
   const [loading, setLoading] = React.useState(true);
-  const [schema, setSchema] = React.useState<GraphQLSchema | null>(null);
-  const [url, setUrl] = React.useState(
-    "https://thankful-beetle-75.hasura.app/v1/graphql"
+  const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
+    undefined
   );
-  const [urlInput, setUrlInput] = React.useState(
-    "https://thankful-beetle-75.hasura.app/v1/graphql"
+  const [url, setUrl] = React.useState(defaultUrl);
+  const [urlInput, setUrlInput] = React.useState(defaultUrl);
+  const [query, setQuery] = React.useState<string | undefined>(defaultQuery);
+  const [headers, setHeaders] = React.useState(
+    untransformHeaders(defaultHeaders)
   );
-  const [query, setQuery] = React.useState<string | undefined>("");
-  const [headers, setHeaders] = React.useState(defaultHeaders);
-  const [headersInput, setHeadersInput] = React.useState(defaultHeaders);
+  const [headersInput, setHeadersInput] = React.useState(
+    untransformHeaders(defaultHeaders)
+  );
+  const [urlCollapsed, setUrlCollapsed] = React.useState(false);
+  const [headersCollapsed, setHeadersCollapsed] = React.useState(false);
+  const [relay, setRelay] = React.useState(false);
+  const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
+  const [explorerVisible, setExplorerVisible] = React.useState(true);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
-      setSchema(null);
+      setSchema(undefined);
       setLoading(true);
       setHeaders(headersInput);
     }
   };
 
-  function graphQLFetcher(graphQLParams: Record<string, any>) {
-    return fetch(url, {
-      method: "post",
-      headers: transformHeaders(headers),
-      body: JSON.stringify(graphQLParams),
-      credentials: "omit",
-    }).then((response) => response.json());
-  }
+  // function graphQLFetcher(graphQLParams: Record<string, any>) {
+  //   return fetch(url, {
+  //     method: "post",
+  //     headers: transformHeaders(headers),
+  //     body: JSON.stringify(graphQLParams),
+  //     credentials: "omit",
+  //   }).then((response) => response.json());
+  // }
+
+  const graphQLFetcher = createGraphiQLFetcher({
+    url: url,
+    subscriptionUrl: defaultSubscriptionUrl,
+    headers: transformHeaders(headers),
+  });
+
+  const extraButtons = () => {
+    const buttons = [
+      {
+        label: "Explorer",
+        title: "Toggle Explorer",
+        onClick: () => setExplorerVisible(!explorerVisible),
+      },
+      {
+        label: "Code Exporter",
+        title: "Toggle Code Exporter",
+        onClick: () => setCodeExporterVisible(!codeExporterVisible),
+      },
+    ];
+    if (url.includes("hasura.app"))
+      buttons.push({
+        label: "Cache",
+        title: "Cache the response of this query",
+        onClick: () => setQuery(toggleCacheDirective(query)),
+      });
+    return buttons.map((b) => {
+      return <GraphiQL.Button key={b.label} {...b} />;
+    });
+  };
 
   React.useEffect(() => {
-    console.log("effect...");
     if (loading)
       fetch(url, {
         method: "post",
@@ -83,7 +114,7 @@ export default function HasuraGraphiQL() {
           setLoading(false);
         })
         .catch(() => {
-          setSchema(null);
+          setSchema(undefined);
           setLoading(false);
         });
   }, [schema, headers, url, loading]);
@@ -91,12 +122,27 @@ export default function HasuraGraphiQL() {
   return (
     <div id="wrapper" className="h-56 m-5">
       <div>
-        <svg width="12" height="9">
-          <path fill="#666" d="M 0 0 L 0 9 L 5.5 4.5 z"></path>
-        </svg>
-        <div className="font-semibold">GraphQL Endpoint</div>
-        <div className="flex mb-md">
-          <div className="flex items-center w-full">
+        {urlCollapsed ? (
+          <span
+            className=" cursor-pointer"
+            onClick={() => setUrlCollapsed(false)}
+          >
+            <IconChevronRight />
+          </span>
+        ) : (
+          <span
+            className=" cursor-pointer"
+            onClick={() => setUrlCollapsed(true)}
+          >
+            <IconChevronDown />
+          </span>
+        )}
+        <span className="font-semibold">GraphQL Endpoint</span>
+        <div
+          className="flex mb-md"
+          style={{ display: urlCollapsed ? "none" : "" }}
+        >
+          <div className="flex items-center" style={{ width: "90%" }}>
             <button
               type="button"
               className="inline-flex cursor-default h-input font-semibold items-center px-3 rounded-l border border-r-0 border-gray-300 bg-gray-50"
@@ -105,22 +151,28 @@ export default function HasuraGraphiQL() {
             </button>
             <input
               type="text"
+              data-testid="endpoint-input"
               className="flex-1 min-w-0 block w-full px-3 py-2 h-input rounded-r border-gray-300"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               onBlur={() => {
                 if (urlInput !== url) {
                   setUrl(urlInput);
-                  setSchema(null);
+                  setSchema(undefined);
                   setLoading(true);
                 }
               }}
             />
           </div>
-          <div className="flex items-center ml-md cursor-pointer">
-            <div className="react-toggle VXfg7r6cesy1kWWR_ptzG _1TCPn04RKhOR-AewE2hZJn">
+          {url.includes("hasura.app") && (
+            <div
+              data-testid="pg-relay-input"
+              className="flex items-center ml-md cursor-pointer switch"
+            >
               <input
+                id="relay-checkbox"
                 type="checkbox"
+                checked={relay}
                 onChange={() => {
                   if (url.includes("relay")) {
                     setUrl(url.replace("v1beta1/relay", "v1/graphql"));
@@ -133,22 +185,44 @@ export default function HasuraGraphiQL() {
                       urlInput.replace("v1/graphql", "v1beta1/relay")
                     );
                   }
+                  setRelay(!relay);
                   setLoading(true);
                 }}
               />
+              <label htmlFor="relay-checkbox" className="whitespace-nowrap">
+                Relay API
+              </label>
+              <i
+                className="fa fa-info-circle _3akQktkNbOKJYjOXUGpLjV "
+                aria-hidden="true"
+              ></i>
             </div>
-            <span className="whitespace-nowrap">Relay API</span>
-            <i
-              className="fa fa-info-circle _3akQktkNbOKJYjOXUGpLjV "
-              aria-hidden="true"
-            ></i>
-          </div>
+          )}
         </div>
       </div>
-      <div className="font-semibold">Request Headers</div>
+      {headersCollapsed ? (
+        <span
+          className=" cursor-pointer"
+          onClick={() => setHeadersCollapsed(false)}
+        >
+          <IconChevronRight />
+        </span>
+      ) : (
+        <span
+          className=" cursor-pointer"
+          onClick={() => setHeadersCollapsed(true)}
+        >
+          <IconChevronDown />
+        </span>
+      )}
+      <span className="font-semibold">Request Headers</span>
       <table
         className="min-w-full divide-y divide-gray-200 border-gray-200"
-        style={{ border: "thin solid lightgray", marginBottom: "32px" }}
+        style={{
+          border: "thin solid lightgray",
+          marginBottom: "32px",
+          display: headersCollapsed ? "none" : "",
+        }}
       >
         <thead>
           <tr className="bg-gray-50">
@@ -194,7 +268,7 @@ export default function HasuraGraphiQL() {
                   className="w-full border-0 outline-none focus:ring-0 focus:outline-none"
                   placeholder="Enter Key"
                   type="text"
-                  data-test-id={`row-key-${i}`}
+                  data-testid={`row-key-${i}`}
                   value={header[1]}
                 />
               </td>
@@ -208,7 +282,7 @@ export default function HasuraGraphiQL() {
                   }
                   className="w-full border-0 focus:ring-0 focus:outline-none"
                   placeholder="Enter Value"
-                  data-test-id={`row-value-${i}`}
+                  data-testid={`row-value-${i}`}
                   type="text"
                   value={header[2]}
                 />
@@ -224,25 +298,11 @@ export default function HasuraGraphiQL() {
                     setLoading(true);
                   }}
                 >
-                  X
+                  <IconCross />
                 </i>
               </td>
             </tr>
           ))}
-          <tr>
-            <td className="text-right">
-              <i
-                className="cursor-pointer mr-md fa fa-eye"
-                data-header-id="1"
-                aria-hidden="true"
-              ></i>
-              <i
-                className="cursor-pointer mr-md fa fa-times"
-                data-header-id="1"
-                aria-hidden="true"
-              ></i>
-            </td>
-          </tr>
           <tr>
             <td className="border-t border-gray-200"></td>
             <td className="border-r border-t border-gray-200">
@@ -299,28 +359,38 @@ export default function HasuraGraphiQL() {
         style={{ height: "430px", border: "thin solid lightgray" }}
       >
         {loading ? (
-          <div className="h-72 min-h-full bg-gray-50 w-72 min-w-full flex items-stretch justify-items-stretch">
-            <div className="skeleton-box min-w-full w-1/4 border-gray-200 min-h-full"></div>
-            <div className="skeleton-box min-w-full w-1/2 border-gray-200 min-h-full"></div>
-            <div className="skeleton-box min-w-full w-1/4 border-gray-200 min-h-full"></div>
-          </div>
+          <div data-testid="loader" className="skeleton-box h-72 min-h-full bg-gray-50 w-72 min-w-full flex items-stretch justify-items-stretch" />
         ) : (
           <>
-            <GraphiQLExplorer
-              schema={schema}
-              query={query}
-              onEdit={(q: string) => setQuery(q)}
-              explorerIsOpen={true}
-              onToggleExplorer={() => null}
-              getDefaultScalarArgValue={null}
-              makeDefaultArg={null}
-              width="300px"
-            />
+            {explorerVisible && (
+              <GraphiQLExplorer
+                schema={schema}
+                query={query}
+                onEdit={(q: string) => setQuery(q)}
+                explorerIsOpen={explorerVisible}
+                onToggleExplorer={() => setExplorerVisible(!explorerVisible)}
+                getDefaultScalarArgValue={null}
+                makeDefaultArg={null}
+                width="300px"
+              />
+            )}
             <GraphiQL
               fetcher={graphQLFetcher}
               query={query}
               onEditQuery={(q) => setQuery(q)}
+              schema={schema}
+              toolbar={{ additionalContent: extraButtons() }}
             />
+            {codeExporterVisible && (
+              <CodeExporter
+                hideCodeExporter={() => setCodeExporterVisible(false)}
+                snippets={snippets}
+                serverUrl={url}
+                headers={{}}
+                query={query}
+                codeMirrorTheme="default"
+              />
+            )}
           </>
         )}
       </div>
