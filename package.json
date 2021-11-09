@@ -1,15 +1,12 @@
 {
   "name": "public-graphiql",
   "version": "0.1.0",
+  "files": ["dist"],
   "dependencies": {
     "@graphiql/toolkit": "^0.4.0",
     "graphiql": "^1.4.6",
     "graphiql-code-exporter": "^3.0.3",
-    "graphiql-explorer": "^0.6.3",
-    "graphql": "^15.5.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "4.0.3"
+    "graphiql-explorer": "^0.6.3"
   },
   "husky": {
     "hooks": {
@@ -68,6 +65,15 @@
     "regenerator-runtime": "^0.13.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "graphql": "^15.5.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-scripts": "4.0.3"
+  },
+  "peerDependencies": {
+    "graphql": "15.x",
+    "react": "16.x",
+    "react-dom": "16.x"
   }
 }
