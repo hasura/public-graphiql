@@ -1,6 +1,13 @@
 #hasura-graphiql-wrapper {
   margin: 1.25rem;
   height: 100%;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  color: rgb(77, 77, 77);
+}
+
+.hasura-graphiql-title-holder {
+  margin-bottom: 16px;
 }
 
 .hasura-graphiql-title {
@@ -14,33 +21,124 @@
 }
 
 .hasura-graphiql-post-button {
-  display: inline-flex;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  background-color: #f9fafb;
-  font-weight: 600;
-  display: inline-flex;
+  -webkit-appearance: none;
   align-items: center;
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-  border-width: 1px;
-  border-right-width: 0;
-  border-color: #d1d5db;
+  background-color: rgb(249, 250, 251);
+  background-image: none;
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-left-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-left-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
   cursor: default;
+  display: flex;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: 600;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgb(77, 77, 77);
+  outline-style: none;
+  outline-width: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 0px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-align: center;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 53.421875px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
 }
 
 .hasura-graphiql-endpoint-input {
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
   display: block;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  flex: 1 1 0%;
-  width: 100%;
-  min-width: 0;
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-  border-color: #d1d5db;
+  flex-basis: 0%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  min-width: 0px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 1220.453125px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
 }
 
 .hasura-graphiql-relay-holder {
@@ -50,85 +148,536 @@
 }
 
 .hasura-graphiql-table {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table;
+  font-family: Gudea;
+  font-size: 14px;
+  line-height: 21px;
   min-width: 100%;
-  border-color: #e5e7eb;
-  border-top-width: 1px;
-  border-color: #e5e7eb;
-  border: "thin solid lightgray";
-  margin-bottom: "32px";
+  tab-size: 4;
+  text-indent: 0px;
+  min-width: 100%;
 }
 
 .hasura-graphiql-table-header-row {
-  background-color: #f9fafb;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(249, 250, 251);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-row;
+  font-family: Gudea;
+  font-size: 14px;
+  line-height: 21px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
 }
 
 .hasura-graphiql-table-header-col-1 {
-  background-color: #f9fafb;
-  color: #4b5563;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(242, 242, 242);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(75, 85, 99);
+  display: table-cell;
+  font-family: Gudea;
+  font-size: 12.25px;
   font-weight: 600;
+  height: 31.5px;
+  letter-spacing: 0.612500011920929px;
+  line-height: 17.5px;
+  max-width: 280px;
+  padding-bottom: 7px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  tab-size: 4;
   text-align: left;
+  text-indent: 0px;
   text-transform: uppercase;
-  width: 4rem;
-  max-width: 20rem;
+  vertical-align: middle;
 }
 
 .hasura-graphiql-table-header-col-2 {
-  background-color: #f9fafb;
-  color: #4b5563;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(242, 242, 242);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(75, 85, 99);
+  display: table-cell;
+  font-family: Gudea;
+  font-size: 12.25px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  height: 31.5px;
+  letter-spacing: 0.612500011920929px;
+  line-height: 17.5px;
+  max-width: 280px;
+  padding-bottom: 7px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  tab-size: 4;
   text-align: left;
+  text-indent: 0px;
   text-transform: uppercase;
-  max-width: 20rem;
+  vertical-align: middle;
 }
 
 .hasura-graphiql-table-checkbox {
-  margin-right: 0.25rem;
-  border-radius: 0.25rem;
-  border-color: #9ca3af;
-  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: none;
+  background-color: rgb(37, 99, 235);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' x…1.414-1.414 NaN NaNlNaN NaN NaN NaNa1 1 0 11.414 0 NaN NaNz'/%3E%3C/svg%3E");
+  background-origin: border-box;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-size: 100% 100%;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgba(0, 0, 0, 0);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgba(0, 0, 0, 0);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-top-left-radius: 3.5px;
+  border-top-right-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(37, 99, 235);
+  cursor: auto;
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 14px;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 4px;
+  outline-color: rgb(37, 99, 235);
+  outline-offset: 2px;
+  outline-style: none;
+  outline-width: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  vertical-align: middle;
+  width: 14px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
 }
 
 .hasura-graphiql-table-input {
-  width: 100%;
-  border-width: 0;
-  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgba(0, 0, 0, 0);
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
 }
 
 .hasura-graphiql-table-cross {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-font-smoothing: antialiased;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
   cursor: pointer;
-  margin-right: 16px;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 14px;
+  line-height: 14px;
+  margin-right: 14px;
+  tab-size: 4;
+  text-align: right;
+  text-indent: 0px;
+  text-rendering: auto;
 }
 
-.hasura-graphiql-table-header-cell-empty {
+.hasura-graphiql-table-cell-empty {
   border-top-width: 1px;
   border-color: #e5e7eb;
 }
 
-.hasura-graphiql-table-header-cell-key-entry {
-  border-top-width: 1px;
+.hasura-graphiql-table-cell-key-entry {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
   border-right-width: 1px;
-  border-color: #e5e7eb;
-}
-
-.hasura-graphiql-table-header-cell-key-entry-input {
-  width: 100%;
-  border-width: 0;
-  outline: 0;
-}
-
-.hasura-graphiql-table-header-cell-value-entry {
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
   border-top-width: 1px;
-  border-color: #e5e7eb;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-cell;
+  font-family: Gudea;
+  font-size: 14px;
+  height: 35.5px;
+  line-height: 21px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
 }
 
-.hasura-graphiql-table-header-cell-value-entry-input {
+.hasura-graphiql-table-cell-key-entry-input {
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgba(0, 0, 0, 0);
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
   width: 100%;
-  border-width: 0;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  border: none;
+}
+
+.hasura-graphiql-table-cell-value-entry {
+  -webkit-border-horizontal-spacing: 0px;
+-webkit-border-vertical-spacing: 0px;
+border-bottom-color: rgb(229, 231, 235);
+border-bottom-style: solid;
+border-bottom-width: 0px;
+border-collapse: collapse;
+border-image-outset: 0;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(229, 231, 235);
+border-left-style: solid;
+border-left-width: 0px;
+border-right-color: rgb(229, 231, 235);
+border-right-style: solid;
+border-right-width: 0px;
+border-top-color: rgb(229, 231, 235);
+border-top-style: solid;
+border-top-width: 1px;
+box-sizing: border-box;
+color: rgb(77, 77, 77);
+display: table-cell;
+font-family: Gudea;
+font-size: 14px;
+height: 35.5px;
+line-height: 21px;
+padding-bottom: 0px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 0px;
+tab-size: 4;
+text-indent: 0px;
+vertical-align: middle;
+}
+
+.hasura-graphiql-table-cell-value-entry-input {
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: Gudea;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 695.25px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  border: none;
 }
 
 .graphiql-container {
@@ -137,90 +686,6 @@
   width: 100%;
 }
 
-/* ** GraphiQL CSS tweaks to fix compatibility */
-/* Input fixes from Tailwind */
-.graphiql-container input,
-.graphiql-container select {
-  min-width: min-content;
-  padding: 4px 8px;
-  height: 32px;
-  border-radius: 4px;
-  border: 1px solid rgb(203, 213, 225) !important;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-}
-.graphiql-container input:focus,
-.graphiql-container select:focus {
-  border: 1px solid rgb(251, 191, 36) !important;
-  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
-    rgb(253, 230, 138) 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-}
-
-.graphiql-explorer-actions > select {
-  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
-    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
-  font-variant-caps: normal;
-  font-weight: 400;
-  border: 1px solid #cbd5e1;
-  font-size: 14px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  margin-left: 8px;
-  margin-right: 8px;
-  height: 32px;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-}
-.graphiql-explorer-actions > select:focus {
-  border: 1px solid rgb(251, 191, 36) !important;
-  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
-    rgb(253, 230, 138) 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-}
-
-/* While we're fixing the inputs maybe the Explorer header + footer */
-/* Fixes header spacing */
-.doc-explorer-title-bar {
-  height: 46px !important;
-}
-.docExplorerHide {
-  padding: 16px !important;
-}
-
-/* Fixes result loading spinner position */
-.graphiql-container .spinner-container {
-  top: 48px !important;
-}
-
-/* Fixes spacing in operation title namer */
-.graphiql-explorer-root {
-  padding-top: 0 !important;
-}
-.graphiql-operation-title-bar {
-  margin-top: 10px;
-}
-.graphiql-operation-title-bar > span > input {
-  margin-right: 4px;
-}
-
-/* Fixes footer spacing */
-.graphiql-explorer-actions > span {
-  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
-    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
-  font-variant-caps: normal;
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0px;
-  text-transform: capitalize;
-}
-.graphiql-explorer-actions {
-  margin: 4px 0px 0px -8px !important;
-  width: calc(100% + 16px) !important;
-  padding: 10px !important;
-}
-
-.graphiql-container .topBar {
-  padding: 24px;
-}
 .switch input[type="checkbox"] {
   height: 0;
   width: 0;

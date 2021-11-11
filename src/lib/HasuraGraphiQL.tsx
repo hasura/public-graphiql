@@ -122,7 +122,7 @@ export default function HasuraGraphiQL({
 
   return (
     <div id="hasura-graphiql-wrapper">
-      <div>
+      <div className="hasura-graphiql-title-holder">
         {urlCollapsed ? (
           <span
             className=" cursor-pointer"
@@ -201,22 +201,24 @@ export default function HasuraGraphiQL({
           )}
         </div>
       </div>
-      {headersCollapsed ? (
-        <span
-          style={{ cursor: "pointer" }}
-          onClick={() => setHeadersCollapsed(false)}
-        >
-          <IconChevronRight />
-        </span>
-      ) : (
-        <span
-          style={{ cursor: "pointer" }}
-          onClick={() => setHeadersCollapsed(true)}
-        >
-          <IconChevronDown />
-        </span>
-      )}
-      <span className="hasura-graphiql-title">Request Headers</span>
+      <div className="hasura-graphiql-title-holder">
+        {headersCollapsed ? (
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setHeadersCollapsed(false)}
+          >
+            <IconChevronRight />
+          </span>
+        ) : (
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setHeadersCollapsed(true)}
+          >
+            <IconChevronDown />
+          </span>
+        )}
+        <span className="hasura-graphiql-title">Request Headers</span>
+      </div>
       <table
         className="hasura-graphiql-table"
         style={{
@@ -225,22 +227,16 @@ export default function HasuraGraphiQL({
       >
         <thead>
           <tr className="hasura-graphiql-table-header-row">
-            <th className="hasura-graphiql-table-header-col-1">
-              Enable
-            </th>
-            <th className="hasura-graphiql-table-header-col-2">
-              Key
-            </th>
-            <th className="hasura-graphiql-table-header-col-2">
-              Value
-            </th>
+            <th className="hasura-graphiql-table-header-col-1">Enable</th>
+            <th className="hasura-graphiql-table-header-col-2">Key</th>
+            <th className="hasura-graphiql-table-header-col-2">Value</th>
             <th className="hasura-graphiql-table-header-col-1"></th>
           </tr>
         </thead>
         <tbody className="bg-white">
           {headersInput.map((header, i) => (
             <tr key={"row" + i}>
-              <td style={{textAlign:'center'}}>
+              <td style={{ textAlign: "center" }}>
                 <input
                   type="checkbox"
                   onChange={(e) => {
@@ -355,7 +351,7 @@ export default function HasuraGraphiQL({
       </table>
       <div
         className="graphiql-container"
-        style={{ height: "430px", border: "thin solid lightgray" }}
+        style={{ height: "70vh", border: "thin solid lightgray" }}
       >
         {loading ? (
           <div

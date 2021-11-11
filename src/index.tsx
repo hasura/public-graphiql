@@ -1,8 +1,6 @@
 import { render } from "react-dom";
 import HasuraGraphiQL from "./lib/HasuraGraphiQL";
 
-import "./index.css";
-
 const container = document.getElementById("root");
 
 let defaultUrl =
