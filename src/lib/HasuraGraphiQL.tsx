@@ -20,7 +20,7 @@ import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
-import "./styles.css"
+import "./styles.css";
 
 export default function HasuraGraphiQL({
   defaultUrl = "",
@@ -121,7 +121,7 @@ export default function HasuraGraphiQL({
   }, [schema, headers, url, loading]);
 
   return (
-    <div id="wrapper" className="h-56 m-5">
+    <div id="hasura-graphiql-wrapper">
       <div>
         {urlCollapsed ? (
           <span
@@ -138,22 +138,21 @@ export default function HasuraGraphiQL({
             <IconChevronDown />
           </span>
         )}
-        <span className="font-semibold">GraphQL Endpoint</span>
+        <span className="hasura-graphiql-title">GraphQL Endpoint</span>
         <div
-          className="flex mb-md"
-          style={{ display: urlCollapsed ? "none" : "" }}
+          style={{
+            display: urlCollapsed ? "none" : "flex",
+            marginBottom: "16px",
+          }}
         >
-          <div className="flex items-center" style={{ width: "90%" }}>
-            <button
-              type="button"
-              className="inline-flex cursor-default h-input font-semibold items-center px-3 rounded-l border border-r-0 border-gray-300 bg-gray-50"
-            >
+          <div className="hasura-graphiql-endpoint-holder">
+            <button type="button" className="hasura-graphiql-post-button">
               POST
             </button>
             <input
               type="text"
               data-testid="endpoint-input"
-              className="flex-1 min-w-0 block w-full px-3 py-2 h-input rounded-r border-gray-300"
+              className="hasura-graphiql-endpoint-input"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               onBlur={() => {
@@ -168,7 +167,8 @@ export default function HasuraGraphiQL({
           {url.includes("hasura.app") && (
             <div
               data-testid="pg-relay-input"
-              className="flex items-center ml-md cursor-pointer switch"
+              className="hasura-graphiql-relay-holder"
+              style={{ display: "none" }}
             >
               <input
                 id="relay-checkbox"
@@ -203,46 +203,44 @@ export default function HasuraGraphiQL({
       </div>
       {headersCollapsed ? (
         <span
-          className=" cursor-pointer"
+          style={{ cursor: "pointer" }}
           onClick={() => setHeadersCollapsed(false)}
         >
           <IconChevronRight />
         </span>
       ) : (
         <span
-          className=" cursor-pointer"
+          style={{ cursor: "pointer" }}
           onClick={() => setHeadersCollapsed(true)}
         >
           <IconChevronDown />
         </span>
       )}
-      <span className="font-semibold">Request Headers</span>
+      <span className="hasura-graphiql-title">Request Headers</span>
       <table
-        className="min-w-full divide-y divide-gray-200 border-gray-200"
+        className="hasura-graphiql-table"
         style={{
-          border: "thin solid lightgray",
-          marginBottom: "32px",
           display: headersCollapsed ? "none" : "",
         }}
       >
         <thead>
-          <tr className="bg-gray-50">
-            <th className="w-16 px-md py-sm max-w-xs text-left text-sm font-semibold bg-gray-50 text-gray-600 uppercase tracking-wider _1NXnbTadkGQC-q_XzwmBGI">
+          <tr className="hasura-graphiql-table-header-row">
+            <th className="hasura-graphiql-table-header-col-1">
               Enable
             </th>
-            <th className="px-md py-sm max-w-xs text-left text-sm font-semibold bg-gray-50 text-gray-600 uppercase tracking-wider">
+            <th className="hasura-graphiql-table-header-col-2">
               Key
             </th>
-            <th className="px-md py-sm max-w-xs text-left text-sm font-semibold bg-gray-50 text-gray-600 uppercase tracking-wider">
+            <th className="hasura-graphiql-table-header-col-2">
               Value
             </th>
-            <th className="w-16 px-md py-sm max-w-xs text-left text-sm font-semibold bg-gray-50 text-gray-600 uppercase tracking-wider"></th>
+            <th className="hasura-graphiql-table-header-col-1"></th>
           </tr>
         </thead>
         <tbody className="bg-white">
           {headersInput.map((header, i) => (
             <tr key={"row" + i}>
-              <td className="text-center">
+              <td style={{textAlign:'center'}}>
                 <input
                   type="checkbox"
                   onChange={(e) => {
@@ -254,11 +252,11 @@ export default function HasuraGraphiQL({
                     );
                     setLoading(true);
                   }}
-                  className="mr-1 border-gray-400 rounded outline-none focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-yellow-400"
+                  className="hasura-graphiql-table-checkbox"
                   checked={header[0]}
                 />
               </td>
-              <td className="border-r border-gray-200">
+              <td className="hasura-graphiql-table-cell">
                 <input
                   onBlur={updateHeaders}
                   onChange={(e) =>
@@ -266,7 +264,7 @@ export default function HasuraGraphiQL({
                       edited2DArray(headersInput, i, 1, e.target.value)
                     )
                   }
-                  className="w-full border-0 outline-none focus:ring-0 focus:outline-none"
+                  className="hasura-graphiql-table-input"
                   placeholder="Enter Key"
                   type="text"
                   data-testid={`row-key-${i}`}
@@ -281,7 +279,7 @@ export default function HasuraGraphiQL({
                       edited2DArray(headersInput, i, 2, e.target.value)
                     )
                   }
-                  className="w-full border-0 focus:ring-0 focus:outline-none"
+                  className="hasura-graphiql-table-input"
                   placeholder="Enter Value"
                   data-testid={`row-value-${i}`}
                   type="text"
@@ -290,7 +288,7 @@ export default function HasuraGraphiQL({
               </td>
               <td className="text-right">
                 <i
-                  className="cursor-pointer mr-md fa fa-times"
+                  className="hasura-graphiql-table-cross"
                   onClick={() => {
                     let result = headersInput.slice();
                     result.splice(i, 1);
@@ -305,10 +303,10 @@ export default function HasuraGraphiQL({
             </tr>
           ))}
           <tr>
-            <td className="border-t border-gray-200"></td>
-            <td className="border-r border-t border-gray-200">
+            <td className="hasura-graphiql-table-cell-empty"></td>
+            <td className="hasura-graphiql-table-cell-key-entry">
               <input
-                className="w-full border-0 outline-none focus:ring-0 focus:outline-none"
+                className="hasura-graphiql-table-cell-key-entry-input"
                 data-header-id="2"
                 placeholder="Enter Key"
                 data-element-name="key"
@@ -329,9 +327,9 @@ export default function HasuraGraphiQL({
                 }}
               />
             </td>
-            <td colSpan={2} className="border-t border-gray-200">
+            <td colSpan={2} className="hasura-graphiql-table-cell-value-entry">
               <input
-                className="w-full border-0 focus:ring-0 focus:outline-none"
+                className="hasura-graphiql-table-cell-value-entry-input"
                 data-header-id="2"
                 placeholder="Enter Value"
                 data-element-name="value"
@@ -356,11 +354,14 @@ export default function HasuraGraphiQL({
         </tbody>
       </table>
       <div
-        className="w-full flex items-stretch graphiql-container"
+        className="graphiql-container"
         style={{ height: "430px", border: "thin solid lightgray" }}
       >
         {loading ? (
-          <div data-testid="loader" className="skeleton-box h-72 min-h-full bg-gray-50 w-72 min-w-full flex items-stretch justify-items-stretch" />
+          <div
+            data-testid="loader"
+            className="skeleton-box h-72 min-h-full bg-gray-50 w-72 min-w-full flex items-stretch justify-items-stretch"
+          />
         ) : (
           <>
             {explorerVisible && (

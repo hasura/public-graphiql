@@ -1,3 +1,5 @@
+import React from 'react'
+
 const IconChevronRight = () => (
   <svg style={{ display: "inline", marginRight:"0.25rem" }} width="16" height="16" viewBox="0 0 16 16">
     <path

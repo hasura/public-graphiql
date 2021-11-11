@@ -1,3 +1,142 @@
+#hasura-graphiql-wrapper {
+  margin: 1.25rem;
+  height: 100%;
+}
+
+.hasura-graphiql-title {
+  font-weight: 600;
+}
+
+.hasura-graphiql-endpoint-holder {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hasura-graphiql-post-button {
+  display: inline-flex;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  background-color: #f9fafb;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-width: 1px;
+  border-right-width: 0;
+  border-color: #d1d5db;
+  cursor: default;
+}
+
+.hasura-graphiql-endpoint-input {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-color: #d1d5db;
+}
+
+.hasura-graphiql-relay-holder {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hasura-graphiql-table {
+  min-width: 100%;
+  border-color: #e5e7eb;
+  border-top-width: 1px;
+  border-color: #e5e7eb;
+  border: "thin solid lightgray";
+  margin-bottom: "32px";
+}
+
+.hasura-graphiql-table-header-row {
+  background-color: #f9fafb;
+}
+
+.hasura-graphiql-table-header-col-1 {
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  text-align: left;
+  text-transform: uppercase;
+  width: 4rem;
+  max-width: 20rem;
+}
+
+.hasura-graphiql-table-header-col-2 {
+  background-color: #f9fafb;
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  max-width: 20rem;
+}
+
+.hasura-graphiql-table-checkbox {
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+  border-color: #9ca3af;
+  outline: 0;
+}
+
+.hasura-graphiql-table-input {
+  width: 100%;
+  border-width: 0;
+  outline: 0;
+}
+
+.hasura-graphiql-table-cross {
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+.hasura-graphiql-table-header-cell-empty {
+  border-top-width: 1px;
+  border-color: #e5e7eb;
+}
+
+.hasura-graphiql-table-header-cell-key-entry {
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-color: #e5e7eb;
+}
+
+.hasura-graphiql-table-header-cell-key-entry-input {
+  width: 100%;
+  border-width: 0;
+  outline: 0;
+}
+
+.hasura-graphiql-table-header-cell-value-entry {
+  border-top-width: 1px;
+  border-color: #e5e7eb;
+}
+
+.hasura-graphiql-table-header-cell-value-entry-input {
+  width: 100%;
+  border-width: 0;
+}
+
+.graphiql-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
 /* ** GraphiQL CSS tweaks to fix compatibility */
 /* Input fixes from Tailwind */
 .graphiql-container input,
