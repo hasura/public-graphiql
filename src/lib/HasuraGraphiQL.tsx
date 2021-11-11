@@ -142,6 +142,7 @@ export default function HasuraGraphiQL({
         <div
           style={{
             display: urlCollapsed ? "none" : "flex",
+            marginTop: "16px",
             marginBottom: "16px",
           }}
         >
@@ -233,10 +234,10 @@ export default function HasuraGraphiQL({
             <th className="hasura-graphiql-table-header-col-1"></th>
           </tr>
         </thead>
-        <tbody className="bg-white">
+        <tbody style={{ backgroundColor: "#fff" }}>
           {headersInput.map((header, i) => (
             <tr key={"row" + i}>
-              <td style={{ textAlign: "center" }}>
+              <td style={{ textAlign: "center", backgroundColor: "#fff" }}>
                 <input
                   type="checkbox"
                   onChange={(e) => {
@@ -267,7 +268,7 @@ export default function HasuraGraphiQL({
                   value={header[1]}
                 />
               </td>
-              <td colSpan={1} className="">
+              <td colSpan={1} className="hasura-graphiql-table-cell">
                 <input
                   onBlur={updateHeaders}
                   onChange={(e) =>
@@ -282,9 +283,8 @@ export default function HasuraGraphiQL({
                   value={header[2]}
                 />
               </td>
-              <td className="text-right">
+              <td className="hasura-graphiql-table-cell-cross">
                 <i
-                  className="hasura-graphiql-table-cross"
                   onClick={() => {
                     let result = headersInput.slice();
                     result.splice(i, 1);
@@ -316,7 +316,7 @@ export default function HasuraGraphiQL({
                   setTimeout(() =>
                     document
                       .querySelector<HTMLElement>(
-                        `[data-test-id=row-key-${headersInput.length}]`
+                        `[data-testid=row-key-${headersInput.length}]`
                       )
                       ?.focus()
                   );

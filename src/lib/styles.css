@@ -1,5 +1,6 @@
 #hasura-graphiql-wrapper {
-  margin: 1.25rem;
+  margin: 0.5rem;
+  margin-top: 1rem;
   height: 100%;
   font-family: "Gudea", sans-serif;
   font-size: 14px;
@@ -153,7 +154,7 @@
   background-color: rgba(0, 0, 0, 0);
   border-bottom-color: rgb(209, 213, 219);
   border-bottom-style: solid;
-  border-bottom-width: 0px;
+  border-bottom-width: 1px;
   border-collapse: collapse;
   border-image-outset: 0;
   border-image-repeat: stretch;
@@ -162,13 +163,13 @@
   border-image-width: 1;
   border-left-color: rgb(209, 213, 219);
   border-left-style: solid;
-  border-left-width: 0px;
+  border-left-width: 1px;
   border-right-color: rgb(209, 213, 219);
   border-right-style: solid;
-  border-right-width: 0px;
+  border-right-width: 1px;
   border-top-color: rgb(209, 213, 219);
   border-top-style: solid;
-  border-top-width: 0px;
+  border-top-width: 1px;
   box-sizing: border-box;
   color: rgb(77, 77, 77);
   display: table;
@@ -179,6 +180,7 @@
   tab-size: 4;
   text-indent: 0px;
   min-width: 100%;
+  margin-bottom: 16px;
 }
 
 .hasura-graphiql-table-header-row {
@@ -255,6 +257,7 @@
   text-indent: 0px;
   text-transform: uppercase;
   vertical-align: middle;
+  width: 5%;
 }
 
 .hasura-graphiql-table-header-col-2 {
@@ -298,6 +301,7 @@
   text-indent: 0px;
   text-transform: uppercase;
   vertical-align: middle;
+  width: 40%;
 }
 
 .hasura-graphiql-table-checkbox {
@@ -371,6 +375,11 @@
   writing-mode: horizontal-tb;
 }
 
+.hasura-graphiql-table-cell {
+  border-right-width: 1px;
+  border-color: rgba(229, 231, 235, 1);
+}
+
 .hasura-graphiql-table-input {
   -webkit-appearance: none;
   -webkit-border-horizontal-spacing: 0px;
@@ -432,9 +441,10 @@
   text-transform: none;
   word-spacing: 0px;
   writing-mode: horizontal-tb;
+  width: 100%;
 }
 
-.hasura-graphiql-table-cross {
+.hasura-graphiql-table-cell-cross {
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
   -webkit-font-smoothing: antialiased;
@@ -473,11 +483,14 @@
   text-align: right;
   text-indent: 0px;
   text-rendering: auto;
+  width: 90%;
+  height: 0.25rem;
 }
 
 .hasura-graphiql-table-cell-empty {
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
   border-top-width: 1px;
-  border-color: #e5e7eb;
 }
 
 .hasura-graphiql-table-cell-key-entry {
@@ -584,39 +597,39 @@
 
 .hasura-graphiql-table-cell-value-entry {
   -webkit-border-horizontal-spacing: 0px;
--webkit-border-vertical-spacing: 0px;
-border-bottom-color: rgb(229, 231, 235);
-border-bottom-style: solid;
-border-bottom-width: 0px;
-border-collapse: collapse;
-border-image-outset: 0;
-border-image-repeat: stretch;
-border-image-slice: 100%;
-border-image-source: none;
-border-image-width: 1;
-border-left-color: rgb(229, 231, 235);
-border-left-style: solid;
-border-left-width: 0px;
-border-right-color: rgb(229, 231, 235);
-border-right-style: solid;
-border-right-width: 0px;
-border-top-color: rgb(229, 231, 235);
-border-top-style: solid;
-border-top-width: 1px;
-box-sizing: border-box;
-color: rgb(77, 77, 77);
-display: table-cell;
-font-family: Gudea;
-font-size: 14px;
-height: 35.5px;
-line-height: 21px;
-padding-bottom: 0px;
-padding-left: 0px;
-padding-right: 0px;
-padding-top: 0px;
-tab-size: 4;
-text-indent: 0px;
-vertical-align: middle;
+  -webkit-border-vertical-spacing: 0px;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-cell;
+  font-family: Gudea;
+  font-size: 14px;
+  height: 35.5px;
+  line-height: 21px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
 }
 
 .hasura-graphiql-table-cell-value-entry-input {
@@ -674,7 +687,7 @@ vertical-align: middle;
   text-indent: 0px;
   text-shadow: none;
   text-transform: none;
-  width: 695.25px;
+  width: 100%;
   word-spacing: 0px;
   writing-mode: horizontal-tb;
   border: none;
