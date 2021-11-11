@@ -1,9 +1,13 @@
 {
-  "name": "public-graphiql",
+  "name": "@hasura/public-graphiql",
   "version": "0.1.0",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
+  "private": false,
+  "main": "dist/HasuraGraphiQL.js",
+  "module": "dist/HasuraGraphiQL.js",
   "dependencies": {
     "@graphiql/toolkit": "^0.4.0",
     "graphiql": "^1.4.6",
