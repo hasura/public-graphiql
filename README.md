@@ -6,6 +6,7 @@
 2. Errors are shown in graphiql response pane too.
 3. Explorer pane is not resizable.
 4. Subscriptions fail.
+5. Needs better readme.
 
 ## Usage
 
@@ -26,9 +27,13 @@ render(
 ### Props
 
 defaultUrl - initial graphql endpoint to be loaded
+
 defaultSubscriptionUrl - initial graphql subscription endpoint to be loaded
+
 defaultHeaders - initial set of request headers to be loaded; key/value object
+
 defaultQuery - intial query to be shown
+
 
 All props are optional.
 
