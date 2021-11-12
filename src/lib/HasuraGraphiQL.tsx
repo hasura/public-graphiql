@@ -369,14 +369,13 @@ export default function HasuraGraphiQL({
         className="graphiql-container"
         style={{ height: "70vh", border: "thin solid lightgray" }}
       >
-        {loading ? (
-          <div
-            data-testid="loader"
-            className="skeleton-box h-72 min-h-full bg-gray-50 w-72 min-w-full flex items-stretch justify-items-stretch"
-          />
-        ) : (
-          <>
-            {explorerVisible && (
+        <>
+          {loading ? (
+            <div data-testid="loader" className="hasura-graphiql-loader">
+              <div className="hasura-graphiql-spinner" />{" "}
+            </div>
+          ) : (
+            explorerVisible && (
               <GraphiQLExplorer
                 schema={schema}
                 query={query}
@@ -387,26 +386,27 @@ export default function HasuraGraphiQL({
                 makeDefaultArg={null}
                 width="300px"
               />
-            )}
-            <GraphiQL
-              fetcher={graphQLFetcher}
+            )
+          )}
+          <GraphiQL
+            fetcher={graphQLFetcher}
+            query={query}
+            onEditQuery={(q) => setQuery(q)}
+            schema={schema}
+            toolbar={{ additionalContent: extraButtons() }}
+            response=""
+          />
+          {codeExporterVisible && (
+            <CodeExporter
+              hideCodeExporter={() => setCodeExporterVisible(false)}
+              snippets={snippets}
+              serverUrl={url}
+              headers={{}}
               query={query}
-              onEditQuery={(q) => setQuery(q)}
-              schema={schema}
-              toolbar={{ additionalContent: extraButtons() }}
+              codeMirrorTheme="default"
             />
-            {codeExporterVisible && (
-              <CodeExporter
-                hideCodeExporter={() => setCodeExporterVisible(false)}
-                snippets={snippets}
-                serverUrl={url}
-                headers={{}}
-                query={query}
-                codeMirrorTheme="default"
-              />
-            )}
-          </>
-        )}
+          )}
+        </>
       </div>
     </div>
   );
