@@ -51,6 +51,7 @@ export default function HasuraGraphiQL({
   const [relay, setRelay] = React.useState(false);
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
+  const [errorShown, setErrorShown] = React.useState(false);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -60,20 +61,32 @@ export default function HasuraGraphiQL({
     }
   };
 
-  // function graphQLFetcher(graphQLParams: Record<string, any>) {
-  //   return fetch(url, {
-  //     method: "post",
-  //     headers: transformHeaders(headers),
-  //     body: JSON.stringify(graphQLParams),
-  //     credentials: "omit",
-  //   }).then((response) => response.json());
-  // }
-
   const graphQLFetcher = createGraphiQLFetcher({
     url: url,
     subscriptionUrl: defaultSubscriptionUrl,
     headers: transformHeaders(headers),
   });
+
+  function ErrorNotification() {
+    return (
+      <div className="hasura-graphiql-notifications-wrapper">
+        <div className="hasura-graphiql-notification-tr">
+          <div className="hasura-graphiql-notification-inner">
+            <h4 className="hasura-graphiql-notification-title">Error</h4>
+            <div className="hasura-graphiql-notification-message">
+              Schema introspection query failed
+            </div>
+            <span
+              className="hasura-graphiql-notification-dismiss"
+              onClick={() => setErrorShown(false)}
+            >
+              ×
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const extraButtons = () => {
     const buttons = [
@@ -113,8 +126,10 @@ export default function HasuraGraphiQL({
         .then((data) => {
           setSchema(buildClientSchema(data.data));
           setLoading(false);
+          setErrorShown(false);
         })
         .catch(() => {
+          setErrorShown(true);
           setSchema(undefined);
           setLoading(false);
         });
@@ -122,6 +137,7 @@ export default function HasuraGraphiQL({
 
   return (
     <div id="hasura-graphiql-wrapper">
+      {errorShown && <ErrorNotification />}
       <div className="hasura-graphiql-title-holder">
         {urlCollapsed ? (
           <span
