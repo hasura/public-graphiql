@@ -52,6 +52,7 @@ export default function HasuraGraphiQL({
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [errorShown, setErrorShown] = React.useState(false);
+  const [error, setError] = React.useState("Error")
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -65,6 +66,7 @@ export default function HasuraGraphiQL({
     url: url,
     subscriptionUrl: defaultSubscriptionUrl,
     headers: transformHeaders(headers),
+    wsConnectionParams: {headers:transformHeaders(headers)},
   });
 
   function ErrorNotification() {
@@ -72,9 +74,9 @@ export default function HasuraGraphiQL({
       <div className="hasura-graphiql-notifications-wrapper">
         <div className="hasura-graphiql-notification-tr">
           <div className="hasura-graphiql-notification-inner">
-            <h4 className="hasura-graphiql-notification-title">Error</h4>
+            <h4 className="hasura-graphiql-notification-title">Schema Introspection Error</h4>
             <div className="hasura-graphiql-notification-message">
-              Schema introspection query failed
+              {error}
             </div>
             <span
               className="hasura-graphiql-notification-dismiss"
@@ -124,6 +126,7 @@ export default function HasuraGraphiQL({
       })
         .then((res) => res.json())
         .then((data) => {
+          if(data.errors) setError(data.errors[0].message)
           setSchema(buildClientSchema(data.data));
           setLoading(false);
           setErrorShown(false);
