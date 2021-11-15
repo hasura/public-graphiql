@@ -142,6 +142,10 @@
   writing-mode: horizontal-tb;
 }
 
+.hasura-graphiql-endpoint-input:focus {
+  outline: none;
+}
+
 .hasura-graphiql-relay-holder {
   display: flex;
   align-items: center;
@@ -511,6 +515,10 @@
   width: 100%;
 }
 
+.hasura-graphiql-table-input:focus {
+  outline: none;
+}
+
 .hasura-graphiql-table-cell-cross {
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
@@ -662,6 +670,10 @@
   border: none;
 }
 
+.hasura-graphiql-table-cell-key-entry-input:focus {
+  outline: none;
+}
+
 .hasura-graphiql-table-cell-value-entry {
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
@@ -758,6 +770,10 @@
   word-spacing: 0px;
   writing-mode: horizontal-tb;
   border: none;
+}
+
+.hasura-graphiql-table-cell-value-entry-input:focus {
+  outline: none;
 }
 
 .hasura-graphiql-notification-wrapper {
