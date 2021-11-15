@@ -1,5 +1,7 @@
 # Hasura GraphiQL Component
 
+Published on NPM at https://www.npmjs.com/package/@hasura/public-graphiql
+
 ## Known Issues
 
 1. Loader style doesn't match console UI loader style.
@@ -26,13 +28,13 @@ render(
 
 ### Props
 
-defaultUrl - initial graphql endpoint to be loaded
+defaultUrl:string - initial graphql endpoint to be loaded
 
-defaultSubscriptionUrl - initial graphql subscription endpoint to be loaded
+defaultSubscriptionUrl:string - initial graphql subscription endpoint to be loaded
 
-defaultHeaders - initial set of request headers to be loaded; key/value object
+defaultHeaders:Record<string, string> - initial set of request headers to be loaded;
 
-defaultQuery - intial query to be shown
+defaultQuery:string - intial query to be shown
 
 
 All props are optional.

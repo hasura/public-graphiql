@@ -1,6 +1,6 @@
 {
   "name": "@hasura/public-graphiql",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "files": [
     "dist",
     "README.md"
@@ -12,7 +12,12 @@
     "@graphiql/toolkit": "^0.4.0",
     "graphiql": "^1.4.6",
     "graphiql-code-exporter": "^3.0.3",
-    "graphiql-explorer": "^0.6.3"
+    "graphiql-explorer": "^0.6.3",
+    "graphql-language-service-utils": "^2.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hasura/public-graphiql"
   },
   "husky": {
     "hooks": {
