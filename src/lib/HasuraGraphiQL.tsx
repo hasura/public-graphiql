@@ -16,6 +16,7 @@ import {
   toggleCacheDirective,
 } from "./utils";
 import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
+import getGraphiQL from "./getGraphiQL";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
@@ -51,7 +52,7 @@ export default function HasuraGraphiQL({
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [errorShown, setErrorShown] = React.useState(false);
-  const [error, setError] = React.useState("Error")
+  const [error, setError] = React.useState(null);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -61,16 +62,22 @@ export default function HasuraGraphiQL({
     }
   };
 
-  const graphQLFetcher = makeFetcher(url, defaultSubscriptionUrl, transformHeaders(headers))
+  const graphQLFetcher = makeFetcher(
+    url,
+    defaultSubscriptionUrl,
+    transformHeaders(headers)
+  );
 
   function ErrorNotification() {
     return (
       <div className="hasura-graphiql-notifications-wrapper">
         <div className="hasura-graphiql-notification-tr">
           <div className="hasura-graphiql-notification-inner">
-            <h4 className="hasura-graphiql-notification-title">Schema Introspection Error</h4>
+            <h4 className="hasura-graphiql-notification-title">
+              Schema Introspection Error
+            </h4>
             <div className="hasura-graphiql-notification-message">
-              {error}
+              {error ? error : "Error loading schema"}
             </div>
             <span
               className="hasura-graphiql-notification-dismiss"
@@ -120,7 +127,8 @@ export default function HasuraGraphiQL({
       })
         .then((res) => res.json())
         .then((data) => {
-          if(data.errors) setError(data.errors[0].message)
+          if (data.errors) setError(data.errors[0].message);
+          else setError(null);
           setSchema(buildClientSchema(data.data));
           setLoading(false);
           setErrorShown(false);
@@ -385,14 +393,13 @@ export default function HasuraGraphiQL({
               />
             )
           )}
-          <GraphiQL
-            fetcher={graphQLFetcher}
-            query={query}
-            onEditQuery={(q) => setQuery(q)}
-            schema={schema}
-            toolbar={{ additionalContent: extraButtons() }}
-            response=""
-          />
+          {getGraphiQL(
+            graphQLFetcher,
+            query,
+            (q: string) => setQuery(q),
+            schema,
+            { additionalContent: extraButtons() }
+          )}
           {codeExporterVisible && (
             <CodeExporter
               hideCodeExporter={() => setCodeExporterVisible(false)}
