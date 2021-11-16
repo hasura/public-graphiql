@@ -8,8 +8,7 @@ import {
 } from "graphql";
 import CodeExporter from "graphiql-code-exporter";
 import snippets from "./snippets";
-import { createGraphiQLFetcher } from "@graphiql/toolkit";
-
+import makeFetcher from "./fetcher";
 import {
   transformHeaders,
   untransformHeaders,
@@ -62,12 +61,7 @@ export default function HasuraGraphiQL({
     }
   };
 
-  const graphQLFetcher = createGraphiQLFetcher({
-    url: url,
-    subscriptionUrl: defaultSubscriptionUrl,
-    headers: transformHeaders(headers),
-    wsConnectionParams: {headers:transformHeaders(headers)},
-  });
+  const graphQLFetcher = makeFetcher(url, defaultSubscriptionUrl, transformHeaders(headers))
 
   function ErrorNotification() {
     return (
