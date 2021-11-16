@@ -25,6 +25,7 @@ render(
     defaultUrl={defaultUrl}
     defaultSubscriptionUrl={defaultSubscriptionUrl}
     defaultHeaders={defaultHeaders}
+    isCloud
   />,
   container
 );

@@ -27,11 +27,13 @@ export default function HasuraGraphiQL({
   defaultSubscriptionUrl = "",
   defaultHeaders = {},
   defaultQuery = "",
+  isCloud = false,
 }: {
   defaultUrl?: string;
   defaultSubscriptionUrl?: string;
   defaultHeaders?: Record<string, string>;
   defaultQuery?: string;
+  isCloud?: boolean;
 }) {
   const [loading, setLoading] = React.useState(true);
   const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
@@ -104,7 +106,7 @@ export default function HasuraGraphiQL({
         onClick: () => setCodeExporterVisible(!codeExporterVisible),
       },
     ];
-    if (url.includes("hasura.app"))
+    if (isCloud)
       buttons.push({
         label: "Cache",
         title: "Cache the response of this query",

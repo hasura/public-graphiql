@@ -1,6 +1,6 @@
 {
   "name": "@hasura/public-graphiql",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "files": [
     "dist",
     "README.md"
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --extensions '.ts,.tsx'",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --extensions '.ts,.tsx,.js'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
