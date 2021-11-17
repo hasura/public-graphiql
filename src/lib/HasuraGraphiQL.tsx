@@ -21,6 +21,7 @@ import getGraphiQL from "./getGraphiQL";
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
 import "./styles.css";
+import Spinner from "./Spinner";
 
 export default function HasuraGraphiQL({
   defaultUrl = "",
@@ -379,7 +380,7 @@ export default function HasuraGraphiQL({
         <>
           {loading ? (
             <div data-testid="loader" className="hasura-graphiql-loader">
-              <div className="hasura-graphiql-spinner" />{" "}
+              <Spinner />
             </div>
           ) : (
             explorerVisible && (
