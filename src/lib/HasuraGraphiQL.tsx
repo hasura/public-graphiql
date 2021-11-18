@@ -16,7 +16,7 @@ import {
   toggleCacheDirective,
 } from "./utils";
 import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
-import getGraphiQL from "./getGraphiQL";
+import CustomGraphiQL from "./CustomGraphiQL";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
@@ -29,12 +29,16 @@ export default function HasuraGraphiQL({
   defaultHeaders = {},
   defaultQuery = "",
   isCloud = false,
+  defaultVariables = "",
+  hiddenHeaders = ["x-hasura-admin-secret"],
 }: {
   defaultUrl?: string;
   defaultSubscriptionUrl?: string;
   defaultHeaders?: Record<string, string>;
   defaultQuery?: string;
   isCloud?: boolean;
+  defaultVariables?: string;
+  hiddenHeaders?: string[];
 }) {
   const [loading, setLoading] = React.useState(true);
   const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
@@ -303,7 +307,7 @@ export default function HasuraGraphiQL({
                   className="hasura-graphiql-table-input"
                   placeholder="Enter Value"
                   data-testid={`row-value-${i}`}
-                  type="text"
+                  type={hiddenHeaders.includes(header[1]) ? "password" : "text"}
                   value={header[2]}
                 />
               </td>
@@ -396,13 +400,14 @@ export default function HasuraGraphiQL({
               />
             )
           )}
-          {getGraphiQL(
-            graphQLFetcher,
-            query,
-            (q: string) => setQuery(q),
-            schema,
-            { additionalContent: extraButtons() }
-          )}
+          <CustomGraphiQL
+            graphQLFetcher={graphQLFetcher}
+            query={query}
+            onEdit={(q: string) => setQuery(q)}
+            schema={schema}
+            toolbarOpts={{ additionalContent: extraButtons() }}
+            variables={defaultVariables}
+          />
           {codeExporterVisible && (
             <CodeExporter
               hideCodeExporter={() => setCodeExporterVisible(false)}

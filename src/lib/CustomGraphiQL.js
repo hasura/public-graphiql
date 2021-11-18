@@ -1,8 +1,8 @@
-// JS is used here instead of TS because of a type issue in GraphiQL. 
+// JS is used here instead of TS because of a type issue in GraphiQL.
 // The 'schema' prop is documented to accept GraphQLSchema | null | undefined
 // but is typed as GraphQLSchema | undefined. This makes the null option unusable.
 // Since schema introspection is prevented only on providing a 'null' param, we
-// are unable to do so because of type errors. Thus, as a workaround, this particular 
+// are unable to do so because of type errors. Thus, as a workaround, this particular
 // component has been extracted into a JS file.
 // References:
 // Doc: https://github.com/graphql/graphiql/blob/main/packages/graphiql/README.md
@@ -11,13 +11,14 @@
 import React from "react";
 import GraphiQL from "graphiql";
 
-export default function getGraphiQL(
+export default function CustomGraphiQL({
   graphQLFetcher,
   query,
   onEdit,
   schema,
-  toolbarOpts
-) {
+  toolbarOpts,
+  variables,
+}) {
   return (
     <GraphiQL
       fetcher={graphQLFetcher}
@@ -26,6 +27,7 @@ export default function getGraphiQL(
       schema={schema === undefined ? null : schema}
       toolbar={toolbarOpts}
       response=""
+      variables={variables}
     />
   );
 }

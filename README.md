@@ -19,6 +19,7 @@ render(
     defaultUrl="https://hasura.io/graphql"
     defaultSubscriptionUrl="wss://hasura.io/graphql"
     defaultHeaders={{'Content-Type':'application/json'}}
+    maskedHeaders={['Content-Type']}
   />,
   container
 );
@@ -32,8 +33,11 @@ defaultSubscriptionUrl:string - initial graphql subscription endpoint to be load
 
 defaultHeaders:Record<string, string> - initial set of request headers to be loaded;
 
+maskedHeaders:string[] - headers whose values are masked
+
 defaultQuery:string - intial query to be shown
 
+defaultVariables:string - intial variables to be shown
 
 All props are optional.
 
