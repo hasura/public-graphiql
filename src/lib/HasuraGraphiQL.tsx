@@ -281,7 +281,7 @@ export default function HasuraGraphiQL({
                   checked={header[0]}
                 />
               </td>
-              <td className="hasura-graphiql-table-cell">
+              <td className="hasura-graphiql-table-cell" style={{borderRight:"thin solid rgb(229, 231, 235)"}}>
                 <input
                   onBlur={updateHeaders}
                   onChange={(e) =>
@@ -379,7 +379,11 @@ export default function HasuraGraphiQL({
       </table>
       <div
         className="graphiql-container"
-        style={{ height: "70vh", border: "thin solid lightgray" }}
+        style={{
+          height: "70vh",
+          border: "thin solid lightgray",
+          borderRadius: "3.5px",
+        }}
       >
         <>
           {loading ? (
