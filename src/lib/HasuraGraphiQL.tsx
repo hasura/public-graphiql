@@ -281,7 +281,10 @@ export default function HasuraGraphiQL({
                   checked={header[0]}
                 />
               </td>
-              <td className="hasura-graphiql-table-cell" style={{borderRight:"thin solid rgb(229, 231, 235)"}}>
+              <td
+                className="hasura-graphiql-table-cell"
+                style={{ borderRight: "thin solid rgb(229, 231, 235)" }}
+              >
                 <input
                   onBlur={updateHeaders}
                   onChange={(e) =>
@@ -341,6 +344,9 @@ export default function HasuraGraphiQL({
                   setHeadersInput(
                     headersInput.concat([[true, e.target.value, ""]])
                   );
+                  document
+                    .querySelector<HTMLElement>(`[data-test=header-key-2]`)
+                    ?.blur();
                   setTimeout(() =>
                     document
                       .querySelector<HTMLElement>(
@@ -364,6 +370,9 @@ export default function HasuraGraphiQL({
                   setHeadersInput(
                     headersInput.concat([[true, "", e.target.value]])
                   );
+                  document
+                    .querySelector<HTMLElement>(`[data-test=header-value-2]`)
+                    ?.blur();
                   setTimeout(() =>
                     document
                       .querySelector<HTMLElement>(
