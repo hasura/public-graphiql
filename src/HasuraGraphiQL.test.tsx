@@ -12,7 +12,7 @@ function mockServerInit() {
       req.reply({
         body: { it: "works" },
       });
-  }).as('gqlfetch');
+  }).as("gqlfetch");
 }
 
 it("introspection and query", () => {
@@ -36,38 +36,34 @@ it("introspection and query", () => {
   cy.get(".cm-string").contains("works");
 });
 
-it("introspect on url change", ()=>{
+it("introspect on url change", () => {
   mockServerInit();
-  mount(
-    <HasuraGraphiQL
-      defaultUrl="https://hasura.io/graphq"
-    />
-  );
-  cy.get('[data-testid=endpoint-input]').type('l')
-  cy.get('[data-testid=endpoint-input]').blur()
-  // cy.get('@gqlfetch').should('have.property', 'status', 200)
+  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
+  cy.get("[data-testid=endpoint-input]").type("l");
+  cy.get("[data-testid=endpoint-input]").blur();
+  cy.get(".graphiql-explorer-field-view").contains("builds");
 });
 
-it("introspect on header change", ()=>{
+it("introspect on header change", () => {
   mockServerInit();
-  mount(
-    <HasuraGraphiQL
-      defaultUrl="https://hasura.io/graphq"
-    />
-  );
-  cy.get('[data-element-name=key]').type('p')
-  cy.get('[data-testid=row-key-0]').type('r')
-  cy.get('[data-testid=row-key-0]').blur()
-  // cy.get('@gqlfetch').should('have.property', 'status', 200)
+  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphql" />);
+  cy.get("[data-element-name=key]").type("p");
+  cy.get("[data-testid=row-key-0]").type("r");
+  cy.get("[data-testid=row-key-0]").blur();
+  cy.get(".graphiql-explorer-field-view").contains("builds");
 });
 
-it("header addition", ()=>{
+it("header addition", () => {
   mockServerInit();
-  mount(
-    <HasuraGraphiQL
-      defaultUrl="https://hasura.io/graphq"
-    />
+  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphql" />);
+  cy.get("[data-element-name=key]").type("p");
+  cy.get("[data-testid=row-key-0]").should("have.value", "p");
+});
+
+it("schema error display", () => {
+  mockServerInit();
+  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
+  cy.get(".hasura-graphiql-notification-message").contains(
+    "Error loading schema"
   );
-  cy.get('[data-element-name=key]').type('p')
-  cy.get('[data-testid=row-key-0]').should('have.value','p')
 });
