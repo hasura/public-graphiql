@@ -309,13 +309,11 @@
 }
 
 .hasura-graphiql-table-checkbox:checked {
-  -webkit-appearance: none;
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
   -webkit-rtl-ordering: logical;
   -webkit-user-select: none;
   background-color: rgb(37, 99, 235);
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' x…1.414-1.414 NaN NaNlNaN NaN NaN NaNa1 1 0 11.414 0 NaN NaNz'/%3E%3C/svg%3E");
   background-origin: border-box;
   background-position-x: 50%;
   background-position-y: 50%;
@@ -347,7 +345,7 @@
   cursor: auto;
   display: inline-block;
   flex-shrink: 0;
-  font-family: Gudea;
+  font-family: "Gudea", sans-serif;
   font-size: 14px;
   font-stretch: normal;
   font-style: normal;
@@ -380,11 +378,9 @@
 }
 
 .hasura-graphiql-table-checkbox {
-  -webkit-appearance: none;
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
   -webkit-rtl-ordering: logical;
-  -webkit-user-select: none;
   background-color: rgb(255, 255, 255);
   background-origin: border-box;
   border-bottom-color: rgb(156, 163, 175);
@@ -832,14 +828,13 @@
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   font-size: 14px;
   height: 100px;
-  left: 1000px;
   line-height: 21px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 0px;
   position: fixed;
-  right: 0px;
+  right: 0;
   tab-size: 4;
   top: 0px;
   width: 440px;

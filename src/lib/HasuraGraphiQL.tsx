@@ -153,14 +153,14 @@ export default function HasuraGraphiQL({
       <div className="hasura-graphiql-title-holder">
         {urlCollapsed ? (
           <span
-            className=" cursor-pointer"
+            style={{ cursor: "pointer" }}
             onClick={() => setUrlCollapsed(false)}
           >
             <IconChevronRight />
           </span>
         ) : (
           <span
-            className=" cursor-pointer"
+            style={{ cursor: "pointer" }}
             onClick={() => setUrlCollapsed(true)}
           >
             <IconChevronDown />
