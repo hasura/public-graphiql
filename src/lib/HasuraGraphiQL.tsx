@@ -15,7 +15,7 @@ import {
   edited2DArray,
   toggleCacheDirective,
 } from "./utils";
-import { IconChevronRight, IconChevronDown, IconCross } from "./Icons";
+import { IconChevronRight, IconChevronDown, IconCross, IconEye } from "./Icons";
 import CustomGraphiQL from "./CustomGraphiQL";
 
 import "graphiql/graphiql.css";
@@ -48,10 +48,10 @@ export default function HasuraGraphiQL({
   const [urlInput, setUrlInput] = React.useState(defaultUrl);
   const [query, setQuery] = React.useState<string | undefined>(defaultQuery);
   const [headers, setHeaders] = React.useState(
-    untransformHeaders(defaultHeaders)
+    untransformHeaders(defaultHeaders, hiddenHeaders)
   );
   const [headersInput, setHeadersInput] = React.useState(
-    untransformHeaders(defaultHeaders)
+    untransformHeaders(defaultHeaders, hiddenHeaders)
   );
   const [urlCollapsed, setUrlCollapsed] = React.useState(false);
   const [headersCollapsed, setHeadersCollapsed] = React.useState(false);
@@ -287,11 +287,21 @@ export default function HasuraGraphiQL({
               >
                 <input
                   onBlur={updateHeaders}
-                  onChange={(e) =>
-                    setHeadersInput(
-                      edited2DArray(headersInput, i, 1, e.target.value)
-                    )
-                  }
+                  onChange={(e) => {
+                    let edited = edited2DArray(
+                      headersInput,
+                      i,
+                      1,
+                      e.target.value
+                    );
+                    edited = edited2DArray(
+                      edited,
+                      i,
+                      3,
+                      hiddenHeaders.includes(e.target.value)
+                    );
+                    setHeadersInput(edited);
+                  }}
                   className="hasura-graphiql-table-input"
                   placeholder="Enter Key"
                   type="text"
@@ -310,11 +320,25 @@ export default function HasuraGraphiQL({
                   className="hasura-graphiql-table-input"
                   placeholder="Enter Value"
                   data-testid={`row-value-${i}`}
-                  type={hiddenHeaders.includes(header[1]) ? "password" : "text"}
+                  type={header[3] ? "password" : "text"}
                   value={header[2]}
                 />
               </td>
               <td className="hasura-graphiql-table-cell-cross">
+                {hiddenHeaders.includes(header[1]) && (
+                  <span
+                    style={{ marginRight: "1em" }}
+                    onClick={() => {
+                      let toggled = !header[3];
+                      setHeadersInput(
+                        edited2DArray(headersInput, i, 3, toggled)
+                      );
+                      setHeaders(edited2DArray(headersInput, i, 3, toggled));
+                    }}
+                  >
+                    <IconEye />
+                  </span>
+                )}
                 <i
                   onClick={() => {
                     let result = headersInput.slice();
@@ -342,7 +366,7 @@ export default function HasuraGraphiQL({
                 value=""
                 onChange={(e) => {
                   setHeadersInput(
-                    headersInput.concat([[true, e.target.value, ""]])
+                    headersInput.concat([[true, e.target.value, "", false]])
                   );
                   document
                     .querySelector<HTMLElement>(`[data-test=header-key-2]`)
@@ -368,7 +392,7 @@ export default function HasuraGraphiQL({
                 value=""
                 onChange={(e) => {
                   setHeadersInput(
-                    headersInput.concat([[true, "", e.target.value]])
+                    headersInput.concat([[true, "", e.target.value, false]])
                   );
                   document
                     .querySelector<HTMLElement>(`[data-test=header-value-2]`)
