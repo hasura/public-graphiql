@@ -1,5 +1,5 @@
 import * as React from "react";
-import GraphiQL from "graphiql";
+import GraphiQL, { GraphiQLProps } from "graphiql";
 import GraphiQLExplorer from "graphiql-explorer";
 import {
   buildClientSchema,
@@ -31,6 +31,8 @@ export default function HasuraGraphiQL({
   isCloud = false,
   defaultVariables = "",
   hiddenHeaders = ["x-hasura-admin-secret"],
+  graphiQLOptions = {},
+  explorerOptions = {},
 }: {
   defaultUrl?: string;
   defaultSubscriptionUrl?: string;
@@ -39,6 +41,8 @@ export default function HasuraGraphiQL({
   isCloud?: boolean;
   defaultVariables?: string;
   hiddenHeaders?: string[];
+  graphiQLOptions?: Omit<GraphiQLProps, "fetcher">;
+  explorerOptions?: Record<string, any>;
 }) {
   const [loading, setLoading] = React.useState(true);
   const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
@@ -434,6 +438,7 @@ export default function HasuraGraphiQL({
                 getDefaultScalarArgValue={null}
                 makeDefaultArg={null}
                 width="300px"
+                {...explorerOptions}
               />
             )
           )}
@@ -444,6 +449,7 @@ export default function HasuraGraphiQL({
             schema={schema}
             toolbarOpts={{ additionalContent: extraButtons() }}
             variables={defaultVariables}
+            graphiQLOptions={graphiQLOptions}
           />
           {codeExporterVisible && (
             <CodeExporter

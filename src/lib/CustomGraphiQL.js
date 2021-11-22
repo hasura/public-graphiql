@@ -18,6 +18,7 @@ export default function CustomGraphiQL({
   schema,
   toolbarOpts,
   variables,
+  graphiQLOptions = {},
 }) {
   return (
     <GraphiQL
@@ -28,6 +29,7 @@ export default function CustomGraphiQL({
       toolbar={toolbarOpts}
       response=""
       variables={variables}
+      {...graphiQLOptions}
     />
   );
 }
