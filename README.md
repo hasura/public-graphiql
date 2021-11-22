@@ -2,13 +2,6 @@
 
 Published on NPM at https://www.npmjs.com/package/@hasura/public-graphiql
 
-## Known Issues
-
-1. Loader style doesn't match console UI loader style.
-2. Explorer pane is not resizable.
-3. Needs better readme.
-4. Hide-able headers
-
 ## Usage
 
 Usage example -
