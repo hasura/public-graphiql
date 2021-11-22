@@ -64,6 +64,8 @@ export default function HasuraGraphiQL({
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [errorShown, setErrorShown] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [responseTime, setResponseTime] = React.useState<number | null>(null);
+  const [responseSize, setResponseSize] = React.useState(0);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -76,7 +78,17 @@ export default function HasuraGraphiQL({
   const graphQLFetcher = makeFetcher(
     url,
     defaultSubscriptionUrl,
-    transformHeaders(headers)
+    transformHeaders(headers),
+    async function customFetch(...args) {
+      setResponseTime(null);
+      let start = Date.now();
+      let returnedPromise = fetch(...args);
+      let res = await returnedPromise;
+      setResponseTime(Date.now() - start);
+      let cloned = res.clone();
+      setResponseSize(JSON.stringify(await cloned.json()).length * 2);
+      return returnedPromise;
+    }
   );
 
   function ErrorNotification() {
@@ -197,7 +209,7 @@ export default function HasuraGraphiQL({
               }}
             />
           </div>
-          {url.includes("hasura.app") && (
+          {isCloud && (
             <div
               data-testid="pg-relay-input"
               className="hasura-graphiql-relay-holder"
@@ -450,6 +462,24 @@ export default function HasuraGraphiQL({
             toolbarOpts={{ additionalContent: extraButtons() }}
             variables={defaultVariables}
             graphiQLOptions={graphiQLOptions}
+            footer={
+              responseTime ? (
+                <GraphiQL.Footer>
+                  <div className="graphiql-footer">
+                    <span className="graphiql-footer-label">Response Time</span>
+                    <span className="graphiql-footer-value">
+                      {`${responseTime} ms`}
+                    </span>
+                    <span className="graphiql-footer-label">Response Size</span>
+                    <span className="graphiql-footer-value">
+                      {`${responseSize} bytes`}
+                    </span>
+                  </div>
+                </GraphiQL.Footer>
+              ) : (
+                <span />
+              )
+            }
           />
           {codeExporterVisible && (
             <CodeExporter

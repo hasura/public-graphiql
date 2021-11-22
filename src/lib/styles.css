@@ -1073,3 +1073,27 @@
 .switch label:active:after {
   width: 130px;
 }
+
+.graphiql-footer {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+  background: #eee;
+  z-index: 100;
+}
+
+.graphiql-footer-label {
+  font-size: 10px;
+  color: #777777;
+  font-weight: 600;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.graphiql-footer-value {
+  margin-right: 16px;
+  font-size: 13px;
+}

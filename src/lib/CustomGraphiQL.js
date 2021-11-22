@@ -19,6 +19,7 @@ export default function CustomGraphiQL({
   toolbarOpts,
   variables,
   graphiQLOptions = {},
+  footer,
 }) {
   return (
     <GraphiQL
@@ -30,6 +31,8 @@ export default function CustomGraphiQL({
       response=""
       variables={variables}
       {...graphiQLOptions}
-    />
+    >
+      {footer}
+    </GraphiQL>
   );
 }
