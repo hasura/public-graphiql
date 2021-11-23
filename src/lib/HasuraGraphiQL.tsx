@@ -66,6 +66,8 @@ export default function HasuraGraphiQL({
   const [error, setError] = React.useState(null);
   const [responseTime, setResponseTime] = React.useState<number | null>(null);
   const [responseSize, setResponseSize] = React.useState(0);
+  const [explorerWidth, setExplorerWidth] = React.useState(300);
+  const [resizing, setResizing] = React.useState(false);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -433,6 +435,9 @@ export default function HasuraGraphiQL({
           border: "thin solid lightgray",
           borderRadius: "3.5px",
         }}
+        onMouseMove={(e) => {
+          if (resizing) setExplorerWidth(e.clientX - 20);
+        }}
       >
         <>
           {loading ? (
@@ -441,17 +446,33 @@ export default function HasuraGraphiQL({
             </div>
           ) : (
             explorerVisible && (
-              <GraphiQLExplorer
-                schema={schema}
-                query={query}
-                onEdit={(q: string) => setQuery(q)}
-                explorerIsOpen={explorerVisible}
-                onToggleExplorer={() => setExplorerVisible(!explorerVisible)}
-                getDefaultScalarArgValue={null}
-                makeDefaultArg={null}
-                width="300px"
-                {...explorerOptions}
-              />
+              <>
+                <GraphiQLExplorer
+                  schema={schema}
+                  query={query}
+                  onEdit={(q: string) => setQuery(q)}
+                  explorerIsOpen={explorerVisible}
+                  onToggleExplorer={() => setExplorerVisible(!explorerVisible)}
+                  getDefaultScalarArgValue={null}
+                  makeDefaultArg={null}
+                  width={`${explorerWidth}px`}
+                  {...explorerOptions}
+                />
+                <div
+                  className="hasura-graphiql-resizer"
+                  onMouseDown={() => {
+                    setResizing(true);
+                    return false;
+                  }}
+                  onMouseUp={() => {
+                    setResizing(false);
+                    return false;
+                  }}
+                  onDragStart={() => false}
+                >
+                  <span className="hasura-graphiql-resize-indicator" />
+                </div>
+              </>
             )
           )}
           <CustomGraphiQL

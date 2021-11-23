@@ -1027,6 +1027,31 @@
   background-color: #fff;
 }
 
+.hasura-graphiql-resizer {
+  height: 100%;
+  position: relative;
+  cursor: col-resize;
+  z-index: 100;
+  width: 1px;
+  background-color: lightgrey;
+}
+
+.hasura-graphiql-resize-indicator {
+  height: 100%;
+  width: 4px;
+  position: absolute;
+  background-color: rgb(37, 99, 235);
+  opacity: 0;
+  z-index: 200;
+  content: " ";
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-delay: 0.25s;
+}
+
+.hasura-graphiql-resize-indicator:hover {
+  opacity: 1;
+}
 .graphiql-container {
   display: flex;
   align-items: stretch;
