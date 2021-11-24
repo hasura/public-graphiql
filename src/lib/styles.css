@@ -1033,7 +1033,7 @@
   cursor: col-resize;
   z-index: 100;
   width: 1px;
-  background-color: lightgrey;
+  background-color: rgb(229, 231, 235);
 }
 
 .hasura-graphiql-resize-indicator {
