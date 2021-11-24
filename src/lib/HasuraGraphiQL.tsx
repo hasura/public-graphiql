@@ -200,6 +200,7 @@ export default function HasuraGraphiQL({
             </button>
             <input
               type="text"
+              disabled
               data-testid="endpoint-input"
               className="hasura-graphiql-endpoint-input"
               value={urlInput}

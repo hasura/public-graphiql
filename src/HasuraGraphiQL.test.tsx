@@ -36,13 +36,13 @@ it("introspection and query", () => {
   cy.get(".cm-string").contains("works");
 });
 
-it("introspect on url change", () => {
-  mockServerInit();
-  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
-  cy.get("[data-testid=endpoint-input]").type("l");
-  cy.get("[data-testid=endpoint-input]").blur();
-  cy.get(".graphiql-explorer-field-view").contains("builds");
-});
+// it("introspect on url change", () => { // commenting this test since user is not allowed to edit endpoint input
+//   mockServerInit();
+//   mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
+//   cy.get("[data-testid=endpoint-input]").type("l");
+//   cy.get("[data-testid=endpoint-input]").blur();
+//   cy.get(".graphiql-explorer-field-view").contains("builds");
+// });
 
 it("introspect on header change", () => {
   mockServerInit();

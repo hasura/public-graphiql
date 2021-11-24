@@ -31,6 +31,7 @@ export default function CustomGraphiQL({
       response=""
       variables={variables}
       {...graphiQLOptions}
+      headerEditorEnabled={false}
     >
       {footer}
     </GraphiQL>
