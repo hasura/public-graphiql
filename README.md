@@ -59,6 +59,8 @@ graphiQLOptions:Omit<GraphiQLProps, fetcher> - props to pass through to GraphiQL
 
 explorerOptions:ExplorerProps - props to pass through to GraphiQLExplorer component
 
+customToolbar: React.ReactNode - elements to be shown next to the endpoint input
+
 All props are optional.
 
 ## Development

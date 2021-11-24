@@ -33,6 +33,7 @@ export default function HasuraGraphiQL({
   hiddenHeaders = ["x-hasura-admin-secret"],
   graphiQLOptions = {},
   explorerOptions = {},
+  customToolbar = null,
 }: {
   defaultUrl?: string;
   defaultSubscriptionUrl?: string;
@@ -43,6 +44,7 @@ export default function HasuraGraphiQL({
   hiddenHeaders?: string[];
   graphiQLOptions?: Omit<GraphiQLProps, "fetcher">;
   explorerOptions?: Record<string, any>;
+  customToolbar?:React.ReactNode
 }) {
   const [loading, setLoading] = React.useState(true);
   const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
@@ -211,6 +213,7 @@ export default function HasuraGraphiQL({
               }}
             />
           </div>
+          {customToolbar}
           {isCloud && (
             <div
               data-testid="pg-relay-input"
