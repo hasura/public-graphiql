@@ -44,7 +44,7 @@ export default function HasuraGraphiQL({
   hiddenHeaders?: string[];
   graphiQLOptions?: Omit<GraphiQLProps, "fetcher">;
   explorerOptions?: Record<string, any>;
-  customToolbar?:React.ReactNode
+  customToolbar?: React.ReactNode;
 }) {
   const [loading, setLoading] = React.useState(true);
   const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
@@ -170,19 +170,16 @@ export default function HasuraGraphiQL({
   return (
     <div id="hasura-graphiql-wrapper">
       {errorShown && <ErrorNotification />}
-      <div className="hasura-graphiql-title-holder">
+      <div
+        className="hasura-graphiql-title-holder"
+        onClick={() => setUrlCollapsed(!urlCollapsed)}
+      >
         {urlCollapsed ? (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setUrlCollapsed(false)}
-          >
+          <span style={{ cursor: "pointer" }}>
             <IconChevronRight />
           </span>
         ) : (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setUrlCollapsed(true)}
-          >
+          <span style={{ cursor: "pointer" }}>
             <IconChevronDown />
           </span>
         )}
@@ -252,19 +249,16 @@ export default function HasuraGraphiQL({
           )}
         </div>
       </div>
-      <div className="hasura-graphiql-title-holder">
+      <div
+        className="hasura-graphiql-title-holder"
+        onClick={() => setHeadersCollapsed(!headersCollapsed)}
+      >
         {headersCollapsed ? (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setHeadersCollapsed(false)}
-          >
+          <span style={{ cursor: "pointer" }}>
             <IconChevronRight />
           </span>
         ) : (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setHeadersCollapsed(true)}
-          >
+          <span style={{ cursor: "pointer" }}>
             <IconChevronDown />
           </span>
         )}

@@ -13,6 +13,7 @@
 
 .hasura-graphiql-title {
   font-weight: 600;
+  cursor: pointer;
 }
 
 .hasura-graphiql-endpoint-holder {
