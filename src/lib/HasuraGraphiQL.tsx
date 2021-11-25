@@ -165,7 +165,7 @@ export default function HasuraGraphiQL({
           setSchema(undefined);
           setLoading(false);
         });
-  }, [schema, headers, url, loading]);
+  }, [headers, url, loading]);
 
   return (
     <div id="hasura-graphiql-wrapper">
