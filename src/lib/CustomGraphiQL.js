@@ -28,7 +28,6 @@ export default function CustomGraphiQL({
       onEditQuery={onEdit}
       schema={schema === undefined ? null : schema}
       toolbar={toolbarOpts}
-      response=""
       variables={variables}
       {...graphiQLOptions}
       headerEditorEnabled={false}
