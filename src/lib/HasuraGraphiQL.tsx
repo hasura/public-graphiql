@@ -25,7 +25,6 @@ import Spinner from "./Spinner";
 
 export default function HasuraGraphiQL({
   defaultUrl = "",
-  defaultSubscriptionUrl = "",
   defaultHeaders = {},
   defaultQuery = "",
   isCloud = false,
@@ -36,7 +35,6 @@ export default function HasuraGraphiQL({
   customToolbar = null,
 }: {
   defaultUrl?: string;
-  defaultSubscriptionUrl?: string;
   defaultHeaders?: Record<string, string>;
   defaultQuery?: string;
   isCloud?: boolean;
@@ -81,7 +79,7 @@ export default function HasuraGraphiQL({
 
   const graphQLFetcher = makeFetcher(
     url,
-    defaultSubscriptionUrl,
+    url.replace("http", "ws"),
     transformHeaders(headers),
     async function customFetch(...args) {
       setResponseTime(null);
@@ -170,20 +168,28 @@ export default function HasuraGraphiQL({
   return (
     <div id="hasura-graphiql-wrapper">
       {errorShown && <ErrorNotification />}
-      <div
-        className="hasura-graphiql-title-holder"
-        onClick={() => setUrlCollapsed(!urlCollapsed)}
-      >
+      <div className="hasura-graphiql-title-holder">
         {urlCollapsed ? (
-          <span style={{ cursor: "pointer" }}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setUrlCollapsed(!urlCollapsed)}
+          >
             <IconChevronRight />
           </span>
         ) : (
-          <span style={{ cursor: "pointer" }}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setUrlCollapsed(!urlCollapsed)}
+          >
             <IconChevronDown />
           </span>
         )}
-        <span className="hasura-graphiql-title">GraphQL Endpoint</span>
+        <span
+          className="hasura-graphiql-title"
+          onClick={() => setUrlCollapsed(!urlCollapsed)}
+        >
+          GraphQL Endpoint
+        </span>
         <div
           style={{
             display: urlCollapsed ? "none" : "flex",
@@ -249,20 +255,28 @@ export default function HasuraGraphiQL({
           )}
         </div>
       </div>
-      <div
-        className="hasura-graphiql-title-holder"
-        onClick={() => setHeadersCollapsed(!headersCollapsed)}
-      >
+      <div className="hasura-graphiql-title-holder">
         {headersCollapsed ? (
-          <span style={{ cursor: "pointer" }}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setHeadersCollapsed(!headersCollapsed)}
+          >
             <IconChevronRight />
           </span>
         ) : (
-          <span style={{ cursor: "pointer" }}>
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => setHeadersCollapsed(!headersCollapsed)}
+          >
             <IconChevronDown />
           </span>
         )}
-        <span className="hasura-graphiql-title">Request Headers</span>
+        <span
+          className="hasura-graphiql-title"
+          onClick={() => setHeadersCollapsed(!headersCollapsed)}
+        >
+          Request Headers
+        </span>
       </div>
       <table
         className="hasura-graphiql-table"
