@@ -1171,3 +1171,31 @@
   max-height: none !important;
   min-height: 53px !important;
 }
+
+.graphiql-container button[title="Prettify Query (Shift-Ctrl-P)"] {
+  order: 0;
+}
+
+.graphiql-container button[title="Merge Query (Shift-Ctrl-M)"] {
+  order: 10;
+}
+
+.graphiql-container button[title="Copy Query (Shift-Ctrl-C)"] {
+  order: 10;
+}
+
+.graphiql-container button[title="Show History"] {
+  order: 1;
+}
+
+.graphiql-container button[title="Toggle Explorer"] {
+  order: 2;
+}
+
+.graphiql-container button[title="Toggle Code Exporter"] {
+  order: 3;
+}
+
+.graphiql-container button[title="Cache the response of this query"] {
+  order: 2;
+}
