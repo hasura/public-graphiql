@@ -31,6 +31,7 @@ export default function CustomGraphiQL({
       variables={variables}
       {...graphiQLOptions}
       headerEditorEnabled={false}
+      dangerouslyAssumeSchemaIsValid
     >
       {footer}
     </GraphiQL>
