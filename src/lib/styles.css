@@ -1024,7 +1024,7 @@
 .hasura-graphiql-loader {
   z-index: 100;
   width: 380px;
-  height: 70vh;
+  height: 100vh;
   background-color: #fff;
 }
 
@@ -1122,4 +1122,52 @@
 .graphiql-footer-value {
   margin-right: 16px;
   font-size: 13px;
+}
+
+.graphiql-explorer-actions > select {
+  color: rgb(119, 119, 119);
+  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
+    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
+  font-variant-caps: normal;
+  font-weight: 400;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 32px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+.graphiql-explorer-actions > select:focus {
+  border: 1px solid rgb(251, 191, 36) !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
+    rgb(253, 230, 138) 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+/* Fixes footer spacing */
+.graphiql-explorer-actions > span {
+  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
+    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
+  font-variant-caps: normal;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  color: rgb(119, 119, 119);
+}
+
+.graphiql-explorer-actions {
+  margin: 4px 0px 0px -8px !important;
+  /* width: calc(100% + 6px) !important; */
+  padding: 10px !important;
+  padding-top: 0 !important;
+  padding-bottom: 5px !important;
+  height: 53px;
+}
+
+.graphiql-explorer-root > div:nth-child(2) {
+  max-height: none !important;
+  min-height: 53px !important;
 }

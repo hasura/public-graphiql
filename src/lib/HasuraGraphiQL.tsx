@@ -17,11 +17,11 @@ import {
 } from "./utils";
 import { IconChevronRight, IconChevronDown, IconCross, IconEye } from "./Icons";
 import CustomGraphiQL from "./CustomGraphiQL";
+import Spinner from "./Spinner";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
 import "./styles.css";
-import Spinner from "./Spinner";
 
 export default function HasuraGraphiQL({
   defaultUrl = "",
@@ -443,7 +443,7 @@ export default function HasuraGraphiQL({
       <div
         className="graphiql-container"
         style={{
-          height: "70vh",
+          height: "100vh",
           border: "thin solid lightgray",
           borderRadius: "3.5px",
         }}
