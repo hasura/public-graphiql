@@ -10,7 +10,8 @@ export default function makeFetcher(
   url,
   subscriptionUrl,
   headers,
-  fetch = window.fetch
+  fetch = window.fetch,
+  onConnecting = () => null
 ) {
   return createGraphiQLFetcher({
     url: url,
@@ -18,6 +19,9 @@ export default function makeFetcher(
     wsClient: createClient({
       url: subscriptionUrl,
       connectionParams: { headers: headers },
+      on: {
+        connecting: onConnecting
+      },
     }),
     fetch: fetch,
   });

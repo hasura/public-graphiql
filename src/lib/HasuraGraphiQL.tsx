@@ -90,6 +90,10 @@ export default function HasuraGraphiQL({
       let cloned = res.clone();
       setResponseSize(JSON.stringify(await cloned.json()).length * 2);
       return returnedPromise;
+    },
+    () => {
+      setResponseTime(null);
+      return null;
     }
   );
 
