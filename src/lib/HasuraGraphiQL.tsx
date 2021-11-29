@@ -14,8 +14,16 @@ import {
   untransformHeaders,
   edited2DArray,
   toggleCacheDirective,
+  hasCacheDirective,
 } from "./utils";
-import { IconChevronRight, IconChevronDown, IconCross, IconEye } from "./Icons";
+import {
+  IconChevronRight,
+  IconChevronDown,
+  IconCross,
+  IconEye,
+  IconInfoCircle,
+  IconCheckCircle,
+} from "./Icons";
 import CustomGraphiQL from "./CustomGraphiQL";
 import Spinner from "./Spinner";
 
@@ -68,6 +76,7 @@ export default function HasuraGraphiQL({
   const [responseSize, setResponseSize] = React.useState(0);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
   const [resizing, setResizing] = React.useState(false);
+  const [isCached, setIsCached] = React.useState(false);
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
@@ -82,6 +91,7 @@ export default function HasuraGraphiQL({
     url.replace("http", "ws"),
     transformHeaders(headers),
     async function customFetch(...args) {
+      setIsCached(hasCacheDirective(query));
       setResponseTime(null);
       let start = Date.now();
       let returnedPromise = fetch(...args);
@@ -511,6 +521,24 @@ export default function HasuraGraphiQL({
                     <span className="graphiql-footer-value">
                       {`${responseSize} bytes`}
                     </span>
+                    {isCached && (
+                      <>
+                        <span className="graphiql-footer-label">Cached</span>
+                        <div className="hasura-graphiql-tooltip">
+                          <IconInfoCircle />
+                          <div className="hasura-graphiql-top">
+                            <span>
+                              This query reponse was cached using the @cached
+                              directive
+                            </span>
+                            <i></i>
+                          </div>
+                        </div>
+                        <span style={{ marginLeft: "4px" }}>
+                          <IconCheckCircle />
+                        </span>
+                      </>
+                    )}
                   </div>
                 </GraphiQL.Footer>
               ) : (

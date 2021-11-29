@@ -1053,19 +1053,73 @@
 .hasura-graphiql-resize-indicator:hover {
   opacity: 1;
 }
+
+.hasura-graphiql-tooltip {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top {
+  min-width: 200px;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #000000;
+  font-weight: normal;
+  font-size: 12px;
+  border-radius: 3.5px;
+  position: absolute;
+  z-index: 99999999;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.hasura-graphiql-tooltip:hover .hasura-graphiql-top {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top i {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -12px;
+  width: 24px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top i::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
 .graphiql-container {
   display: flex;
   align-items: stretch;
   width: 100%;
 }
 
-.switch input[type="checkbox"] {
+.hasura-graphiql-switch input[type="checkbox"] {
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-.switch label {
+.hasura-graphiql-switch label {
   text-indent: 3rem;
   cursor: pointer;
   width: 3rem;
@@ -1076,7 +1130,7 @@
   position: relative;
 }
 
-.switch label:after {
+.hasura-graphiql-switch label:after {
   content: "";
   position: absolute;
   top: 1px;
@@ -1087,16 +1141,16 @@
   border-radius: 1.4rem;
 }
 
-.switch input:checked + label {
+.hasura-graphiql-switch input:checked + label {
   background: #1eb4d4;
 }
 
-.switch input:checked + label:after {
+.hasura-graphiql-switch input:checked + label:after {
   left: calc(100% - 1px);
   transform: translateX(-100%);
 }
 
-.switch label:active:after {
+.hasura-graphiql-switch label:active:after {
   width: 130px;
 }
 

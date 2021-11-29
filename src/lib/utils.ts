@@ -32,6 +32,23 @@ export function edited2DArray(
   return res;
 }
 
+export const hasCacheDirective = (
+  operationString: string | undefined
+): boolean => {
+  if (!operationString) return false;
+  let operationAst;
+  try {
+    operationAst = sdlParse(operationString);
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+
+  return operationAst.definitions.some((def: any) => {
+    return def.directives.some((dir: any) => dir.name.value === "cached");
+  });
+};
+
 export const toggleCacheDirective = (
   operationString: string | undefined
 ): string => {
