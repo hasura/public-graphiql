@@ -1,6 +1,6 @@
 {
   "name": "@hasura/public-graphiql",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "files": [
     "dist",
     "README.md"

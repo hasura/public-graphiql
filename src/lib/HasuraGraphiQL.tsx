@@ -14,7 +14,6 @@ import {
   untransformHeaders,
   edited2DArray,
   toggleCacheDirective,
-  hasCacheDirective,
 } from "./utils";
 import {
   IconChevronRight,
@@ -91,13 +90,14 @@ export default function HasuraGraphiQL({
     url.replace("http", "ws"),
     transformHeaders(headers),
     async function customFetch(...args) {
-      setIsCached(hasCacheDirective(query));
+      setIsCached(false);
       setResponseTime(null);
       let start = Date.now();
       let returnedPromise = fetch(...args);
       let res = await returnedPromise;
       setResponseTime(Date.now() - start);
       let cloned = res.clone();
+      setIsCached(res.headers.has("Cache-Control"));
       setResponseSize(JSON.stringify(await cloned.json()).length * 2);
       return returnedPromise;
     },
