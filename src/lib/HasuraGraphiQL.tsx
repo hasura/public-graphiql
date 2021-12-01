@@ -16,18 +16,14 @@ import {
   edited2DArray,
   toggleCacheDirective,
 } from "./utils";
-import {
-  IconCross,
-  IconEye,
-  IconInfoCircle,
-  IconCheckCircle,
-} from "./Icons";
+import { IconCross, IconEye, IconInfoCircle, IconCheckCircle } from "./Icons";
 import Spinner from "./Spinner";
 
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
 import "./styles.css";
 import Collapsible from "./Collapsible";
+import ErrorNotification from "./ErrorNotification";
 
 export default function HasuraGraphiQL({
   url,
@@ -61,8 +57,7 @@ export default function HasuraGraphiQL({
   );
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
-  const [errorShown, setErrorShown] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState<string | null>(null);
   const [responseTime, setResponseTime] = React.useState<number | null>(null);
   const [responseSize, setResponseSize] = React.useState(0);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
@@ -104,29 +99,6 @@ export default function HasuraGraphiQL({
     },
   });
 
-  function ErrorNotification() {
-    return (
-      <div className="hasura-graphiql-notifications-wrapper">
-        <div className="hasura-graphiql-notification-tr">
-          <div className="hasura-graphiql-notification-inner">
-            <h4 className="hasura-graphiql-notification-title">
-              Schema Introspection Error
-            </h4>
-            <div className="hasura-graphiql-notification-message">
-              {error ? error : "Error loading schema"}
-            </div>
-            <span
-              className="hasura-graphiql-notification-dismiss"
-              onClick={() => setErrorShown(false)}
-            >
-              ×
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const extraButtons = () => {
     const buttons = [
       {
@@ -163,13 +135,14 @@ export default function HasuraGraphiQL({
       .then((res) => res.json())
       .then((data) => {
         if (data.errors) setError(data.errors[0].message);
-        else setError(null);
-        setSchema(buildClientSchema(data.data));
+        else {
+          setError(null);
+          setSchema(buildClientSchema(data.data));
+        }
         setLoading(false);
-        setErrorShown(false);
       })
       .catch(() => {
-        setErrorShown(true);
+        setError("Error loading schema");
         setSchema(null);
         setLoading(false);
       });
@@ -177,7 +150,7 @@ export default function HasuraGraphiQL({
 
   return (
     <div id="hasura-graphiql-wrapper">
-      {errorShown && <ErrorNotification />}
+      {error && <ErrorNotification message={error} />}
       <Collapsible title="GraphQL Endpoint">
         <div className="hasura-graphiql-endpoint-holder">
           <button type="button" className="hasura-graphiql-post-button">
@@ -194,9 +167,7 @@ export default function HasuraGraphiQL({
         {customToolbar}
       </Collapsible>
       <Collapsible title="Request Headers">
-        <table
-          className="hasura-graphiql-table"
-        >
+        <table className="hasura-graphiql-table">
           <thead>
             <tr className="hasura-graphiql-table-header-row">
               <th className="hasura-graphiql-table-header-col-1">Enable</th>

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { IconChevronRight, IconChevronDown } from "./Icons";
-import "./styles.css";
 
 export default function Collapsible({
   title,
