@@ -17,8 +17,6 @@ import {
   toggleCacheDirective,
 } from "./utils";
 import {
-  IconChevronRight,
-  IconChevronDown,
   IconCross,
   IconEye,
   IconInfoCircle,
@@ -29,6 +27,7 @@ import Spinner from "./Spinner";
 import "graphiql/graphiql.css";
 import "graphiql-code-exporter/CodeExporter.css";
 import "./styles.css";
+import Collapsible from "./Collapsible";
 
 export default function HasuraGraphiQL({
   url,
@@ -60,8 +59,6 @@ export default function HasuraGraphiQL({
   const [headersInput, setHeadersInput] = React.useState(
     untransformHeaders(defaultHeaders, hiddenHeaders)
   );
-  const [urlCollapsed, setUrlCollapsed] = React.useState(false);
-  const [headersCollapsed, setHeadersCollapsed] = React.useState(false);
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [errorShown, setErrorShown] = React.useState(false);
@@ -181,235 +178,185 @@ export default function HasuraGraphiQL({
   return (
     <div id="hasura-graphiql-wrapper">
       {errorShown && <ErrorNotification />}
-      <div className="hasura-graphiql-title-holder">
-        {urlCollapsed ? (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setUrlCollapsed(!urlCollapsed)}
-          >
-            <IconChevronRight />
-          </span>
-        ) : (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setUrlCollapsed(!urlCollapsed)}
-          >
-            <IconChevronDown />
-          </span>
-        )}
-        <span
-          className="hasura-graphiql-title"
-          onClick={() => setUrlCollapsed(!urlCollapsed)}
-        >
-          GraphQL Endpoint
-        </span>
-        <div
-          style={{
-            display: urlCollapsed ? "none" : "flex",
-            marginTop: "16px",
-            marginBottom: "16px",
-          }}
-        >
-          <div className="hasura-graphiql-endpoint-holder">
-            <button type="button" className="hasura-graphiql-post-button">
-              POST
-            </button>
-            <input
-              type="text"
-              disabled
-              data-testid="endpoint-input"
-              className="hasura-graphiql-endpoint-input"
-              value={url}
-            />
-          </div>
-          {customToolbar}
+      <Collapsible title="GraphQL Endpoint">
+        <div className="hasura-graphiql-endpoint-holder">
+          <button type="button" className="hasura-graphiql-post-button">
+            POST
+          </button>
+          <input
+            type="text"
+            disabled
+            data-testid="endpoint-input"
+            className="hasura-graphiql-endpoint-input"
+            value={url}
+          />
         </div>
-      </div>
-      <div className="hasura-graphiql-title-holder">
-        {headersCollapsed ? (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setHeadersCollapsed(!headersCollapsed)}
-          >
-            <IconChevronRight />
-          </span>
-        ) : (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setHeadersCollapsed(!headersCollapsed)}
-          >
-            <IconChevronDown />
-          </span>
-        )}
-        <span
-          className="hasura-graphiql-title"
-          onClick={() => setHeadersCollapsed(!headersCollapsed)}
+        {customToolbar}
+      </Collapsible>
+      <Collapsible title="Request Headers">
+        <table
+          className="hasura-graphiql-table"
         >
-          Request Headers
-        </span>
-      </div>
-      <table
-        className="hasura-graphiql-table"
-        style={{
-          display: headersCollapsed ? "none" : "",
-        }}
-      >
-        <thead>
-          <tr className="hasura-graphiql-table-header-row">
-            <th className="hasura-graphiql-table-header-col-1">Enable</th>
-            <th className="hasura-graphiql-table-header-col-2">Key</th>
-            <th className="hasura-graphiql-table-header-col-2">Value</th>
-            <th className="hasura-graphiql-table-header-col-1"></th>
-          </tr>
-        </thead>
-        <tbody style={{ backgroundColor: "#fff" }}>
-          {headersInput.map((header, i) => (
-            <tr key={"row" + i}>
-              <td style={{ textAlign: "center", backgroundColor: "#fff" }}>
+          <thead>
+            <tr className="hasura-graphiql-table-header-row">
+              <th className="hasura-graphiql-table-header-col-1">Enable</th>
+              <th className="hasura-graphiql-table-header-col-2">Key</th>
+              <th className="hasura-graphiql-table-header-col-2">Value</th>
+              <th className="hasura-graphiql-table-header-col-1"></th>
+            </tr>
+          </thead>
+          <tbody style={{ backgroundColor: "#fff" }}>
+            {headersInput.map((header, i) => (
+              <tr key={"row" + i}>
+                <td style={{ textAlign: "center", backgroundColor: "#fff" }}>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => {
+                      setHeadersInput(
+                        edited2DArray(headersInput, i, 0, e.target.checked)
+                      );
+                      setHeaders(
+                        edited2DArray(headersInput, i, 0, e.target.checked)
+                      );
+                      setLoading(true);
+                    }}
+                    className="hasura-graphiql-table-checkbox"
+                    checked={header[0]}
+                  />
+                </td>
+                <td
+                  className="hasura-graphiql-table-cell"
+                  style={{ borderRight: "thin solid rgb(229, 231, 235)" }}
+                >
+                  <input
+                    onBlur={updateHeaders}
+                    onChange={(e) => {
+                      let edited = edited2DArray(
+                        headersInput,
+                        i,
+                        1,
+                        e.target.value
+                      );
+                      edited = edited2DArray(
+                        edited,
+                        i,
+                        3,
+                        hiddenHeaders.includes(e.target.value)
+                      );
+                      setHeadersInput(edited);
+                    }}
+                    className="hasura-graphiql-table-input"
+                    placeholder="Enter Key"
+                    type="text"
+                    data-testid={`row-key-${i}`}
+                    value={header[1]}
+                  />
+                </td>
+                <td colSpan={1} className="hasura-graphiql-table-cell">
+                  <input
+                    onBlur={updateHeaders}
+                    onChange={(e) =>
+                      setHeadersInput(
+                        edited2DArray(headersInput, i, 2, e.target.value)
+                      )
+                    }
+                    className="hasura-graphiql-table-input"
+                    placeholder="Enter Value"
+                    data-testid={`row-value-${i}`}
+                    type={header[3] ? "password" : "text"}
+                    value={header[2]}
+                  />
+                </td>
+                <td className="hasura-graphiql-table-cell-cross">
+                  {hiddenHeaders.includes(header[1]) && (
+                    <span
+                      style={{ marginRight: "1em" }}
+                      onClick={() => {
+                        let toggled = !header[3];
+                        setHeadersInput(
+                          edited2DArray(headersInput, i, 3, toggled)
+                        );
+                        setHeaders(edited2DArray(headersInput, i, 3, toggled));
+                      }}
+                    >
+                      <IconEye />
+                    </span>
+                  )}
+                  <i
+                    onClick={() => {
+                      let result = headersInput.slice();
+                      result.splice(i, 1);
+                      setHeadersInput(result);
+                      setHeaders(result);
+                      setLoading(true);
+                    }}
+                  >
+                    <IconCross />
+                  </i>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td className="hasura-graphiql-table-cell-empty"></td>
+              <td className="hasura-graphiql-table-cell-key-entry">
                 <input
-                  type="checkbox"
+                  className="hasura-graphiql-table-cell-key-entry-input"
+                  data-header-id="2"
+                  placeholder="Enter Key"
+                  data-element-name="key"
+                  type="text"
+                  data-test="header-key-2"
+                  value=""
                   onChange={(e) => {
                     setHeadersInput(
-                      edited2DArray(headersInput, i, 0, e.target.checked)
+                      headersInput.concat([[true, e.target.value, "", false]])
                     );
-                    setHeaders(
-                      edited2DArray(headersInput, i, 0, e.target.checked)
+                    document
+                      .querySelector<HTMLElement>(`[data-test=header-key-2]`)
+                      ?.blur();
+                    setTimeout(() =>
+                      document
+                        .querySelector<HTMLElement>(
+                          `[data-testid=row-key-${headersInput.length}]`
+                        )
+                        ?.focus()
                     );
-                    setLoading(true);
                   }}
-                  className="hasura-graphiql-table-checkbox"
-                  checked={header[0]}
                 />
               </td>
               <td
-                className="hasura-graphiql-table-cell"
-                style={{ borderRight: "thin solid rgb(229, 231, 235)" }}
+                colSpan={2}
+                className="hasura-graphiql-table-cell-value-entry"
               >
                 <input
-                  onBlur={updateHeaders}
-                  onChange={(e) => {
-                    let edited = edited2DArray(
-                      headersInput,
-                      i,
-                      1,
-                      e.target.value
-                    );
-                    edited = edited2DArray(
-                      edited,
-                      i,
-                      3,
-                      hiddenHeaders.includes(e.target.value)
-                    );
-                    setHeadersInput(edited);
-                  }}
-                  className="hasura-graphiql-table-input"
-                  placeholder="Enter Key"
-                  type="text"
-                  data-testid={`row-key-${i}`}
-                  value={header[1]}
-                />
-              </td>
-              <td colSpan={1} className="hasura-graphiql-table-cell">
-                <input
-                  onBlur={updateHeaders}
-                  onChange={(e) =>
-                    setHeadersInput(
-                      edited2DArray(headersInput, i, 2, e.target.value)
-                    )
-                  }
-                  className="hasura-graphiql-table-input"
+                  className="hasura-graphiql-table-cell-value-entry-input"
+                  data-header-id="2"
                   placeholder="Enter Value"
-                  data-testid={`row-value-${i}`}
-                  type={header[3] ? "password" : "text"}
-                  value={header[2]}
-                />
-              </td>
-              <td className="hasura-graphiql-table-cell-cross">
-                {hiddenHeaders.includes(header[1]) && (
-                  <span
-                    style={{ marginRight: "1em" }}
-                    onClick={() => {
-                      let toggled = !header[3];
-                      setHeadersInput(
-                        edited2DArray(headersInput, i, 3, toggled)
-                      );
-                      setHeaders(edited2DArray(headersInput, i, 3, toggled));
-                    }}
-                  >
-                    <IconEye />
-                  </span>
-                )}
-                <i
-                  onClick={() => {
-                    let result = headersInput.slice();
-                    result.splice(i, 1);
-                    setHeadersInput(result);
-                    setHeaders(result);
-                    setLoading(true);
+                  data-element-name="value"
+                  data-test="header-value-2"
+                  type="text"
+                  value=""
+                  onChange={(e) => {
+                    setHeadersInput(
+                      headersInput.concat([[true, "", e.target.value, false]])
+                    );
+                    document
+                      .querySelector<HTMLElement>(`[data-test=header-value-2]`)
+                      ?.blur();
+                    setTimeout(() =>
+                      document
+                        .querySelector<HTMLElement>(
+                          `[data-testid=row-value-${headersInput.length}]`
+                        )
+                        ?.focus()
+                    );
                   }}
-                >
-                  <IconCross />
-                </i>
+                />
               </td>
             </tr>
-          ))}
-          <tr>
-            <td className="hasura-graphiql-table-cell-empty"></td>
-            <td className="hasura-graphiql-table-cell-key-entry">
-              <input
-                className="hasura-graphiql-table-cell-key-entry-input"
-                data-header-id="2"
-                placeholder="Enter Key"
-                data-element-name="key"
-                type="text"
-                data-test="header-key-2"
-                value=""
-                onChange={(e) => {
-                  setHeadersInput(
-                    headersInput.concat([[true, e.target.value, "", false]])
-                  );
-                  document
-                    .querySelector<HTMLElement>(`[data-test=header-key-2]`)
-                    ?.blur();
-                  setTimeout(() =>
-                    document
-                      .querySelector<HTMLElement>(
-                        `[data-testid=row-key-${headersInput.length}]`
-                      )
-                      ?.focus()
-                  );
-                }}
-              />
-            </td>
-            <td colSpan={2} className="hasura-graphiql-table-cell-value-entry">
-              <input
-                className="hasura-graphiql-table-cell-value-entry-input"
-                data-header-id="2"
-                placeholder="Enter Value"
-                data-element-name="value"
-                data-test="header-value-2"
-                type="text"
-                value=""
-                onChange={(e) => {
-                  setHeadersInput(
-                    headersInput.concat([[true, "", e.target.value, false]])
-                  );
-                  document
-                    .querySelector<HTMLElement>(`[data-test=header-value-2]`)
-                    ?.blur();
-                  setTimeout(() =>
-                    document
-                      .querySelector<HTMLElement>(
-                        `[data-testid=row-value-${headersInput.length}]`
-                      )
-                      ?.focus()
-                  );
-                }}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </Collapsible>
       <div
         className="graphiql-container"
         style={{
