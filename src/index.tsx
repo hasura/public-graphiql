@@ -19,7 +19,7 @@ let defaultHeaders = Object.keys(headersFromParams).length
 
 render(
   <HasuraGraphiQL
-    defaultUrl={defaultUrl}
+    url={defaultUrl}
     defaultHeaders={defaultHeaders}
     isCloud
   />,

@@ -8,7 +8,8 @@ import {
 } from "graphql";
 import CodeExporter from "graphiql-code-exporter";
 import snippets from "./snippets";
-import makeFetcher from "./fetcher";
+import { createGraphiQLFetcher } from "@graphiql/toolkit";
+import { createClient } from "graphql-ws";
 import {
   transformHeaders,
   untransformHeaders,
@@ -23,7 +24,6 @@ import {
   IconInfoCircle,
   IconCheckCircle,
 } from "./Icons";
-import CustomGraphiQL from "./CustomGraphiQL";
 import Spinner from "./Spinner";
 
 import "graphiql/graphiql.css";
@@ -31,7 +31,7 @@ import "graphiql-code-exporter/CodeExporter.css";
 import "./styles.css";
 
 export default function HasuraGraphiQL({
-  defaultUrl = "",
+  url,
   defaultHeaders = {},
   defaultQuery = "",
   isCloud = false,
@@ -41,7 +41,7 @@ export default function HasuraGraphiQL({
   explorerOptions = {},
   customToolbar = null,
 }: {
-  defaultUrl?: string;
+  url: string;
   defaultHeaders?: Record<string, string>;
   defaultQuery?: string;
   isCloud?: boolean;
@@ -52,11 +52,7 @@ export default function HasuraGraphiQL({
   customToolbar?: React.ReactNode;
 }) {
   const [loading, setLoading] = React.useState(true);
-  const [schema, setSchema] = React.useState<GraphQLSchema | undefined>(
-    undefined
-  );
-  const [url, setUrl] = React.useState(defaultUrl);
-  const [urlInput, setUrlInput] = React.useState(defaultUrl);
+  const [schema, setSchema] = React.useState<GraphQLSchema | null>(null);
   const [query, setQuery] = React.useState<string | undefined>(defaultQuery);
   const [headers, setHeaders] = React.useState(
     untransformHeaders(defaultHeaders, hiddenHeaders)
@@ -66,7 +62,6 @@ export default function HasuraGraphiQL({
   );
   const [urlCollapsed, setUrlCollapsed] = React.useState(false);
   const [headersCollapsed, setHeadersCollapsed] = React.useState(false);
-  const [relay, setRelay] = React.useState(false);
   const [codeExporterVisible, setCodeExporterVisible] = React.useState(false);
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [errorShown, setErrorShown] = React.useState(false);
@@ -79,17 +74,26 @@ export default function HasuraGraphiQL({
 
   const updateHeaders = () => {
     if (headersInput !== headers) {
-      setSchema(undefined);
+      setSchema(null);
       setLoading(true);
       setHeaders(headersInput);
     }
   };
 
-  const graphQLFetcher = makeFetcher(
-    url,
-    url.replace("http", "ws"),
-    transformHeaders(headers),
-    async function customFetch(...args) {
+  const graphQLFetcher = createGraphiQLFetcher({
+    url: url,
+    headers: transformHeaders(headers),
+    wsClient: createClient({
+      url: url.replace("http", "ws"),
+      connectionParams: { headers: transformHeaders(headers) },
+      on: {
+        connecting: () => {
+          setResponseTime(null);
+          return null;
+        },
+      },
+    }),
+    fetch: async function customFetch(...args) {
       setIsCached(false);
       setResponseTime(null);
       let start = Date.now();
@@ -101,11 +105,7 @@ export default function HasuraGraphiQL({
       setResponseSize(JSON.stringify(await cloned.json()).length * 2);
       return returnedPromise;
     },
-    () => {
-      setResponseTime(null);
-      return null;
-    }
-  );
+  });
 
   function ErrorNotification() {
     return (
@@ -155,29 +155,28 @@ export default function HasuraGraphiQL({
   };
 
   React.useEffect(() => {
-    if (loading)
-      fetch(url, {
-        method: "post",
-        headers: transformHeaders(headers),
-        body: JSON.stringify({
-          query: getIntrospectionQuery(),
-        }),
-        credentials: "omit",
+    fetch(url, {
+      method: "post",
+      headers: transformHeaders(headers),
+      body: JSON.stringify({
+        query: getIntrospectionQuery(),
+      }),
+      credentials: "omit",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.errors) setError(data.errors[0].message);
+        else setError(null);
+        setSchema(buildClientSchema(data.data));
+        setLoading(false);
+        setErrorShown(false);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.errors) setError(data.errors[0].message);
-          else setError(null);
-          setSchema(buildClientSchema(data.data));
-          setLoading(false);
-          setErrorShown(false);
-        })
-        .catch(() => {
-          setErrorShown(true);
-          setSchema(undefined);
-          setLoading(false);
-        });
-  }, [headers, url, loading]);
+      .catch(() => {
+        setErrorShown(true);
+        setSchema(null);
+        setLoading(false);
+      });
+  }, [headers, url]);
 
   return (
     <div id="hasura-graphiql-wrapper">
@@ -220,53 +219,10 @@ export default function HasuraGraphiQL({
               disabled
               data-testid="endpoint-input"
               className="hasura-graphiql-endpoint-input"
-              value={urlInput}
-              onChange={(e) => setUrlInput(e.target.value)}
-              onBlur={() => {
-                if (urlInput !== url) {
-                  setUrl(urlInput);
-                  setSchema(undefined);
-                  setLoading(true);
-                }
-              }}
+              value={url}
             />
           </div>
           {customToolbar}
-          {isCloud && (
-            <div
-              data-testid="pg-relay-input"
-              className="hasura-graphiql-relay-holder"
-              style={{ display: "none" }}
-            >
-              <input
-                id="relay-checkbox"
-                type="checkbox"
-                checked={relay}
-                onChange={() => {
-                  if (url.includes("relay")) {
-                    setUrl(url.replace("v1beta1/relay", "v1/graphql"));
-                    setUrlInput(
-                      urlInput.replace("v1beta1/relay", "v1/graphql")
-                    );
-                  } else {
-                    setUrl(url.replace("v1/graphql", "v1beta1/relay"));
-                    setUrlInput(
-                      urlInput.replace("v1/graphql", "v1beta1/relay")
-                    );
-                  }
-                  setRelay(!relay);
-                  setLoading(true);
-                }}
-              />
-              <label htmlFor="relay-checkbox" className="whitespace-nowrap">
-                Relay API
-              </label>
-              <i
-                className="fa fa-info-circle _3akQktkNbOKJYjOXUGpLjV "
-                aria-hidden="true"
-              ></i>
-            </div>
-          )}
         </div>
       </div>
       <div className="hasura-graphiql-title-holder">
@@ -501,51 +457,52 @@ export default function HasuraGraphiQL({
               </>
             )
           )}
-          <CustomGraphiQL
-            graphQLFetcher={graphQLFetcher}
+          <GraphiQL
+            fetcher={graphQLFetcher}
             query={query}
-            onEdit={(q: string) => setQuery(q)}
+            onEditQuery={(q: string | undefined) => setQuery(q)}
             schema={schema}
-            toolbarOpts={{ additionalContent: extraButtons() }}
+            toolbar={{ additionalContent: extraButtons() }}
             variables={defaultVariables}
-            graphiQLOptions={graphiQLOptions}
-            footer={
-              responseTime ? (
-                <GraphiQL.Footer>
-                  <div className="graphiql-footer">
-                    <span className="graphiql-footer-label">Response Time</span>
-                    <span className="graphiql-footer-value">
-                      {`${responseTime} ms`}
-                    </span>
-                    <span className="graphiql-footer-label">Response Size</span>
-                    <span className="graphiql-footer-value">
-                      {`${responseSize} bytes`}
-                    </span>
-                    {isCached && (
-                      <>
-                        <span className="graphiql-footer-label">Cached</span>
-                        <div className="hasura-graphiql-tooltip">
-                          <IconInfoCircle />
-                          <div className="hasura-graphiql-top">
-                            <span>
-                              This query reponse was cached using the @cached
-                              directive
-                            </span>
-                            <i></i>
-                          </div>
+            {...graphiQLOptions}
+            headerEditorEnabled={false}
+            dangerouslyAssumeSchemaIsValid
+          >
+            {responseTime ? (
+              <GraphiQL.Footer>
+                <div className="graphiql-footer">
+                  <span className="graphiql-footer-label">Response Time</span>
+                  <span className="graphiql-footer-value">
+                    {`${responseTime} ms`}
+                  </span>
+                  <span className="graphiql-footer-label">Response Size</span>
+                  <span className="graphiql-footer-value">
+                    {`${responseSize} bytes`}
+                  </span>
+                  {isCached && (
+                    <>
+                      <span className="graphiql-footer-label">Cached</span>
+                      <div className="hasura-graphiql-tooltip">
+                        <IconInfoCircle />
+                        <div className="hasura-graphiql-top">
+                          <span>
+                            This query reponse was cached using the @cached
+                            directive
+                          </span>
+                          <i></i>
                         </div>
-                        <span style={{ marginLeft: "4px" }}>
-                          <IconCheckCircle />
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </GraphiQL.Footer>
-              ) : (
-                <span />
-              )
-            }
-          />
+                      </div>
+                      <span style={{ marginLeft: "4px" }}>
+                        <IconCheckCircle />
+                      </span>
+                    </>
+                  )}
+                </div>
+              </GraphiQL.Footer>
+            ) : (
+              <span />
+            )}
+          </GraphiQL>
           {codeExporterVisible && (
             <CodeExporter
               hideCodeExporter={() => setCodeExporterVisible(false)}
