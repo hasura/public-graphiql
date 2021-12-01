@@ -1,7 +1,7 @@
 import { parse as sdlParse } from "graphql/language/parser";
 import { print as sdlPrint } from "graphql/language/printer";
 
-export function transformHeaders(
+export function headersArrayToObject(
   headers: [boolean, string, string, boolean][]
 ): Record<string, string> {
   let res = {} as Record<string, any>;
@@ -10,7 +10,7 @@ export function transformHeaders(
   return res;
 }
 
-export function untransformHeaders(
+export function headersObjectToArray(
   headers: Record<string, string>,
   hidden: string[]
 ): [boolean, string, string, boolean][] {
