@@ -61,6 +61,7 @@ export default function HeaderEditor({
                 onBlur={() => {
                   if (syncRequired)
                     syncWithParent(headersArrayToObject(headerArray));
+                    setData({headerArray:headerArray, syncRequired:false})
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 1, e.target.value);
@@ -87,6 +88,7 @@ export default function HeaderEditor({
                 onBlur={() => {
                   if (syncRequired)
                     syncWithParent(headersArrayToObject(headerArray));
+                    setData({headerArray:headerArray, syncRequired:false})
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 2, e.target.value);
