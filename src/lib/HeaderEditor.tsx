@@ -59,9 +59,10 @@ export default function HeaderEditor({
             >
               <input
                 onBlur={() => {
-                  if (syncRequired)
+                  if (syncRequired) {
                     syncWithParent(headerArrayToObject(headerArray));
-                  setData({ headerArray: headerArray, syncRequired: false });
+                    setData({ headerArray: headerArray, syncRequired: false });
+                  }
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 1, e.target.value);
@@ -86,9 +87,10 @@ export default function HeaderEditor({
             <td colSpan={1} className="hasura-graphiql-table-cell">
               <input
                 onBlur={() => {
-                  if (syncRequired)
+                  if (syncRequired) {
                     syncWithParent(headerArrayToObject(headerArray));
-                  setData({ headerArray: headerArray, syncRequired: false });
+                    setData({ headerArray: headerArray, syncRequired: false });
+                  }
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 2, e.target.value);
