@@ -16,20 +16,26 @@ export default function HeaderEditor({
   onUpdate: (headers: Record<string, string>) => void;
 }) {
   const [headersInput, setHeadersInput] = React.useState(
-    headersObjectToArray(initialHeaders, hiddenHeaders)
+    headersObjectToArray(initialHeaders, hiddenHeaders).concat([
+      [true, "", "", false],
+    ])
   );
   const [updateRequired, setUpdateRequired] = React.useState(false);
 
   React.useEffect(
     function syncUpdateRequired() {
+      console.log("headers changed");
       setUpdateRequired(true);
     },
     [headersInput]
   );
 
   function updateIfRequired() {
-    if (updateRequired) onUpdate(headersArrayToObject(headersInput));
-    setUpdateRequired(false);
+    if (updateRequired) {
+      console.log("headers synced");
+      onUpdate(headersArrayToObject(headersInput));
+      setUpdateRequired(false);
+    }
   }
 
   return (
@@ -49,10 +55,10 @@ export default function HeaderEditor({
               <input
                 type="checkbox"
                 onChange={(e) => {
-                  setHeadersInput(
-                    edited2DArray(headersInput, i, 0, e.target.checked)
-                  );
-                  updateIfRequired();
+                  let res = edited2DArray(headersInput, i, 0, e.target.checked);
+                  setHeadersInput(res);
+                  onUpdate(headersArrayToObject(res));
+                  setUpdateRequired(false);
                 }}
                 className="hasura-graphiql-table-checkbox"
                 checked={header[0]}
@@ -77,6 +83,8 @@ export default function HeaderEditor({
                     3,
                     hiddenHeaders.includes(e.target.value)
                   );
+                  if (i === headersInput.length - 1)
+                    edited.push([true, "", "", false]);
                   setHeadersInput(edited);
                 }}
                 className="hasura-graphiql-table-input"
@@ -89,11 +97,17 @@ export default function HeaderEditor({
             <td colSpan={1} className="hasura-graphiql-table-cell">
               <input
                 onBlur={updateIfRequired}
-                onChange={(e) =>
-                  setHeadersInput(
-                    edited2DArray(headersInput, i, 2, e.target.value)
-                  )
-                }
+                onChange={(e) => {
+                  let edited = edited2DArray(
+                    headersInput,
+                    i,
+                    2,
+                    e.target.value
+                  );
+                  if (i === headersInput.length - 1)
+                    edited.push([true, "", "", false]);
+                  setHeadersInput(edited);
+                }}
                 className="hasura-graphiql-table-input"
                 placeholder="Enter Value"
                 data-testid={`row-value-${i}`}
@@ -102,84 +116,35 @@ export default function HeaderEditor({
               />
             </td>
             <td className="hasura-graphiql-table-cell-cross">
-              {hiddenHeaders.includes(header[1]) && (
-                <span
-                  style={{ marginRight: "1em" }}
+              {hiddenHeaders.includes(header[1]) &&
+                i < headersInput.length - 1 && (
+                  <span
+                    style={{ marginRight: "1em", cursor: "pointer" }}
+                    onClick={() => {
+                      let toggled = !header[3];
+                      setHeadersInput(
+                        edited2DArray(headersInput, i, 3, toggled)
+                      );
+                    }}
+                  >
+                    <IconEye />
+                  </span>
+                )}
+              {i < headersInput.length - 1 && (
+                <i
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    let toggled = !header[3];
-                    setHeadersInput(edited2DArray(headersInput, i, 3, toggled));
+                    let result = headersInput.slice();
+                    result.splice(i, 1);
+                    setHeadersInput(result);
                   }}
                 >
-                  <IconEye />
-                </span>
+                  <IconCross />
+                </i>
               )}
-              <i
-                onClick={() => {
-                  let result = headersInput.slice();
-                  result.splice(i, 1);
-                  setHeadersInput(result);
-                }}
-              >
-                <IconCross />
-              </i>
             </td>
           </tr>
         ))}
-        <tr>
-          <td className="hasura-graphiql-table-cell-empty"></td>
-          <td className="hasura-graphiql-table-cell-key-entry">
-            <input
-              className="hasura-graphiql-table-cell-key-entry-input"
-              data-header-id="2"
-              placeholder="Enter Key"
-              data-element-name="key"
-              type="text"
-              data-test="header-key-2"
-              value=""
-              onChange={(e) => {
-                setHeadersInput(
-                  headersInput.concat([[true, e.target.value, "", false]])
-                );
-                document
-                  .querySelector<HTMLElement>(`[data-test=header-key-2]`)
-                  ?.blur();
-                setTimeout(() =>
-                  document
-                    .querySelector<HTMLElement>(
-                      `[data-testid=row-key-${headersInput.length}]`
-                    )
-                    ?.focus()
-                );
-              }}
-            />
-          </td>
-          <td colSpan={2} className="hasura-graphiql-table-cell-value-entry">
-            <input
-              className="hasura-graphiql-table-cell-value-entry-input"
-              data-header-id="2"
-              placeholder="Enter Value"
-              data-element-name="value"
-              data-test="header-value-2"
-              type="text"
-              value=""
-              onChange={(e) => {
-                setHeadersInput(
-                  headersInput.concat([[true, "", e.target.value, false]])
-                );
-                document
-                  .querySelector<HTMLElement>(`[data-test=header-value-2]`)
-                  ?.blur();
-                setTimeout(() =>
-                  document
-                    .querySelector<HTMLElement>(
-                      `[data-testid=row-value-${headersInput.length}]`
-                    )
-                    ?.focus()
-                );
-              }}
-            />
-          </td>
-        </tr>
       </tbody>
     </table>
   );

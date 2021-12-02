@@ -541,7 +541,6 @@
   border-top-width: 0px;
   box-sizing: border-box;
   color: rgb(77, 77, 77);
-  cursor: pointer;
   display: inline-block;
   font-family: FontAwesome;
   font-size: 14px;
@@ -560,10 +559,24 @@
   height: 0.25rem;
 }
 
-.hasura-graphiql-table-cell-empty {
+.hasura-graphiql-table tr:last-of-type td {
   border-top-color: rgb(229, 231, 235);
   border-top-style: solid;
   border-top-width: 1px;
+}
+
+.hasura-graphiql-table tr:last-of-type input[type="checkbox"] {
+  display: none;
+}
+
+.hasura-graphiql-table tr:last-of-type td:last-of-type {
+  padding-top: 1.2rem;
+}
+
+.hasura-graphiql-table
+  tr:last-of-type
+  .hasura-graphiql-table-cell-cross:last-of-type {
+  width: 100%;
 }
 
 .hasura-graphiql-table-cell-key-entry {

@@ -5,7 +5,7 @@ import {
   GraphQLSchema,
 } from "graphql";
 
-type IntrospectionResultType = {
+type IntrospectionInfoType = {
   introspecting: boolean;
   schema: GraphQLSchema | null;
   error: string | null;
@@ -15,8 +15,8 @@ export default function useIntrospection(
   headers: Record<string, string>,
   url: string
 ) {
-  const [introspectionResult, setIntrospectionResult] =
-    React.useState<IntrospectionResultType>({
+  const [IntrospectionInfo, setIntrospectionInfo] =
+    React.useState<IntrospectionInfoType>({
       introspecting: false,
       schema: null,
       error: null,
@@ -24,7 +24,7 @@ export default function useIntrospection(
 
   React.useEffect(
     function performIntrospection() {
-      setIntrospectionResult({
+      setIntrospectionInfo({
         introspecting: true,
         schema: null,
         error: null,
@@ -40,13 +40,13 @@ export default function useIntrospection(
         .then((res) => res.json())
         .then((data) => {
           if (data.errors)
-            setIntrospectionResult({
+            setIntrospectionInfo({
               introspecting: false,
               schema: null,
               error: data.errors[0].message,
             });
           else {
-            setIntrospectionResult({
+            setIntrospectionInfo({
               introspecting: false,
               schema: buildClientSchema(data.data),
               error: null,
@@ -54,7 +54,7 @@ export default function useIntrospection(
           }
         })
         .catch(() => {
-          setIntrospectionResult({
+          setIntrospectionInfo({
             error: "Error introspecting schema",
             schema: null,
             introspecting: false,
@@ -63,5 +63,5 @@ export default function useIntrospection(
     },
     [headers, url]
   );
-  return introspectionResult;
+  return IntrospectionInfo;
 }

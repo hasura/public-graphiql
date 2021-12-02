@@ -6,7 +6,7 @@ export function headersArrayToObject(
 ): Record<string, string> {
   let res = {} as Record<string, any>;
   for (let header of headers)
-    if (header[0]) res[header[1] as unknown as string] = header[2];
+    if (header[0] && header[1].length) res[header[1] as unknown as string] = header[2];
   return res;
 }
 
