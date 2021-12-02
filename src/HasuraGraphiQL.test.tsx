@@ -15,8 +15,11 @@ function mockServerInit() {
   }).as("gqlfetch");
 }
 
-it("introspection and query", () => {
+beforeEach(() => {
   mockServerInit();
+});
+
+it("introspection and query", () => {
   let defaultQuery = `query MyQuery {
     builds {
       commit
@@ -26,7 +29,7 @@ it("introspection and query", () => {
 
   mount(
     <HasuraGraphiQL
-      defaultUrl="https://hasura.io/graphql"
+      url="https://hasura.io/graphql"
       defaultQuery={defaultQuery}
     />
   );
@@ -36,34 +39,24 @@ it("introspection and query", () => {
   cy.get(".cm-string").contains("works");
 });
 
-// it("introspect on url change", () => { // commenting this test since user is not allowed to edit endpoint input
-//   mockServerInit();
-//   mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
-//   cy.get("[data-testid=endpoint-input]").type("l");
-//   cy.get("[data-testid=endpoint-input]").blur();
-//   cy.get(".graphiql-explorer-field-view").contains("builds");
-// });
-
 it("introspect on header change", () => {
-  mockServerInit();
-  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphql" />);
-  cy.get("[data-element-name=key]").type("p");
-  cy.get("[data-testid=row-key-0]").type("r");
-  cy.get("[data-testid=row-key-0]").blur();
+  mount(<HasuraGraphiQL url="https://hasura.io/graphql" />);
+  cy.get("[data-testid=row-key-0]").type("p");
+  cy.get("[data-testid=row-key-1]").type("r");
+  cy.get("[data-testid=row-key-1]").blur();
   cy.get(".graphiql-explorer-field-view").contains("builds");
 });
 
 it("header addition", () => {
-  mockServerInit();
-  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphql" />);
-  cy.get("[data-element-name=key]").type("p");
+  mount(<HasuraGraphiQL url="https://hasura.io/graphql" />);
+  cy.get("[data-testid=row-key-0]").type("p");
   cy.get("[data-testid=row-key-0]").should("have.value", "p");
+  cy.get("[data-testid=row-key-1]").should("have.value", "");
 });
 
 it("schema error display", () => {
-  mockServerInit();
-  mount(<HasuraGraphiQL defaultUrl="https://hasura.io/graphq" />);
-  cy.get(".hasura-graphiql-notification-message").contains(
-    "Error loading schema"
+  mount(<HasuraGraphiQL url="https://hasura.io/graphq" />);
+  cy.get(".hasura-graphiql-notification-title").contains(
+    "Schema Introspection Error"
   );
 });
