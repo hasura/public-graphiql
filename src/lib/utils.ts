@@ -79,3 +79,11 @@ export const toggleCacheDirective = (
     throw new Error("cannot build the operation string");
   }
 };
+
+export function debounce(fn:Function, delay:number) {
+  let timeout:any
+  return function (...args:any[]) {
+    clearTimeout(timeout)
+    timeout = setTimeout(()=>fn(...args), delay)
+  }
+}
