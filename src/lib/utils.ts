@@ -1,16 +1,17 @@
 import { parse as sdlParse } from "graphql/language/parser";
 import { print as sdlPrint } from "graphql/language/printer";
 
-export function headersArrayToObject(
+export function headerArrayToObject(
   headers: [boolean, string, string, boolean][]
 ): Record<string, string> {
   let res = {} as Record<string, any>;
   for (let header of headers)
-    if (header[0] && header[1].length) res[header[1] as unknown as string] = header[2];
+    if (header[0] && header[1].length)
+      res[header[1] as unknown as string] = header[2];
   return res;
 }
 
-export function headersObjectToArray(
+export function headerObjectToArray(
   headers: Record<string, string>,
   hidden: string[]
 ): [boolean, string, string, boolean][] {
@@ -80,10 +81,10 @@ export const toggleCacheDirective = (
   }
 };
 
-export function debounce(fn:Function, delay:number) {
-  let timeout:any
-  return function (...args:any[]) {
-    clearTimeout(timeout)
-    timeout = setTimeout(()=>fn(...args), delay)
-  }
+export function debounce(fn: Function, delay: number) {
+  let timeout: any;
+  return function (...args: any[]) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  headersObjectToArray,
-  headersArrayToObject,
+  headerObjectToArray,
+  headerArrayToObject,
   edited2DArray,
 } from "./utils";
 import { IconCross, IconEye } from "./Icons";
@@ -17,7 +17,7 @@ export default function HeaderEditor({
   onUpdate: (headers: Record<string, string>) => void;
 }) {
   const [{ headerArray, syncRequired }, setData] = React.useState({
-    headerArray: headersObjectToArray(initialHeaders, hiddenHeaders).concat([
+    headerArray: headerObjectToArray(initialHeaders, hiddenHeaders).concat([
       [true, "", "", false],
     ]),
     syncRequired: false,
@@ -46,7 +46,7 @@ export default function HeaderEditor({
                 type="checkbox"
                 onChange={(e) => {
                   let res = edited2DArray(headerArray, i, 0, e.target.checked);
-                  syncWithParent(headersArrayToObject(res));
+                  syncWithParent(headerArrayToObject(res));
                   setData(() => ({ headerArray: res, syncRequired: false }));
                 }}
                 className="hasura-graphiql-table-checkbox"
@@ -60,8 +60,8 @@ export default function HeaderEditor({
               <input
                 onBlur={() => {
                   if (syncRequired)
-                    syncWithParent(headersArrayToObject(headerArray));
-                    setData({headerArray:headerArray, syncRequired:false})
+                    syncWithParent(headerArrayToObject(headerArray));
+                  setData({ headerArray: headerArray, syncRequired: false });
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 1, e.target.value);
@@ -87,8 +87,8 @@ export default function HeaderEditor({
               <input
                 onBlur={() => {
                   if (syncRequired)
-                    syncWithParent(headersArrayToObject(headerArray));
-                    setData({headerArray:headerArray, syncRequired:false})
+                    syncWithParent(headerArrayToObject(headerArray));
+                  setData({ headerArray: headerArray, syncRequired: false });
                 }}
                 onChange={(e) => {
                   let edited = edited2DArray(headerArray, i, 2, e.target.value);
@@ -125,7 +125,7 @@ export default function HeaderEditor({
                   onClick={() => {
                     let result = headerArray.slice();
                     result.splice(i, 1);
-                    syncWithParent(headersArrayToObject(result));
+                    syncWithParent(headerArrayToObject(result));
                     setData({ headerArray: result, syncRequired: false });
                   }}
                 >
