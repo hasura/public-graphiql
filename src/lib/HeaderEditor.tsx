@@ -15,26 +15,17 @@ export default function HeaderEditor({
   hiddenHeaders?: string[];
   onUpdate: (headers: Record<string, string>) => void;
 }) {
-  const [headersInput, setHeadersInput] = React.useState(
-    headersObjectToArray(initialHeaders, hiddenHeaders).concat([
+  const [{ headerArray, updateRequired }, setData] = React.useState({
+    headerArray: headersObjectToArray(initialHeaders, hiddenHeaders).concat([
       [true, "", "", false],
-    ])
-  );
-  const [updateRequired, setUpdateRequired] = React.useState(false);
-
-  React.useEffect(
-    function syncUpdateRequired() {
-      console.log("headers changed");
-      setUpdateRequired(true);
-    },
-    [headersInput]
-  );
+    ]),
+    updateRequired: false,
+  });
 
   function updateIfRequired() {
     if (updateRequired) {
-      console.log("headers synced");
-      onUpdate(headersArrayToObject(headersInput));
-      setUpdateRequired(false);
+      onUpdate(headersArrayToObject(headerArray));
+      setData({ headerArray: headerArray, updateRequired: false });
     }
   }
 
@@ -49,16 +40,15 @@ export default function HeaderEditor({
         </tr>
       </thead>
       <tbody style={{ backgroundColor: "#fff" }}>
-        {headersInput.map((header, i) => (
+        {headerArray.map((header, i) => (
           <tr key={"row" + i}>
             <td style={{ textAlign: "center", backgroundColor: "#fff" }}>
               <input
                 type="checkbox"
                 onChange={(e) => {
-                  let res = edited2DArray(headersInput, i, 0, e.target.checked);
-                  setHeadersInput(res);
+                  let res = edited2DArray(headerArray, i, 0, e.target.checked);
                   onUpdate(headersArrayToObject(res));
-                  setUpdateRequired(false);
+                  setData(()=>({ headerArray: res, updateRequired: false }));
                 }}
                 className="hasura-graphiql-table-checkbox"
                 checked={header[0]}
@@ -71,21 +61,17 @@ export default function HeaderEditor({
               <input
                 onBlur={updateIfRequired}
                 onChange={(e) => {
-                  let edited = edited2DArray(
-                    headersInput,
-                    i,
-                    1,
-                    e.target.value
-                  );
+                  let edited = edited2DArray(headerArray, i, 1, e.target.value);
                   edited = edited2DArray(
                     edited,
                     i,
                     3,
                     hiddenHeaders.includes(e.target.value)
                   );
-                  if (i === headersInput.length - 1)
+                  if (i === headerArray.length - 1)
+                    // add blank row below
                     edited.push([true, "", "", false]);
-                  setHeadersInput(edited);
+                  setData({ headerArray: edited, updateRequired: true });
                 }}
                 className="hasura-graphiql-table-input"
                 placeholder="Enter Key"
@@ -98,15 +84,11 @@ export default function HeaderEditor({
               <input
                 onBlur={updateIfRequired}
                 onChange={(e) => {
-                  let edited = edited2DArray(
-                    headersInput,
-                    i,
-                    2,
-                    e.target.value
-                  );
-                  if (i === headersInput.length - 1)
+                  let edited = edited2DArray(headerArray, i, 2, e.target.value);
+                  if (i === headerArray.length - 1)
+                    // add blank row
                     edited.push([true, "", "", false]);
-                  setHeadersInput(edited);
+                  setData({ headerArray: edited, updateRequired: true });
                 }}
                 className="hasura-graphiql-table-input"
                 placeholder="Enter Value"
@@ -116,27 +98,28 @@ export default function HeaderEditor({
               />
             </td>
             <td className="hasura-graphiql-table-cell-cross">
-              {hiddenHeaders.includes(header[1]) &&
-                i < headersInput.length - 1 && (
-                  <span
-                    style={{ marginRight: "1em", cursor: "pointer" }}
-                    onClick={() => {
-                      let toggled = !header[3];
-                      setHeadersInput(
-                        edited2DArray(headersInput, i, 3, toggled)
-                      );
-                    }}
-                  >
-                    <IconEye />
-                  </span>
-                )}
-              {i < headersInput.length - 1 && (
+              {hiddenHeaders.includes(header[1]) && i < headerArray.length - 1 && (
+                <span
+                  style={{ marginRight: "1em", cursor: "pointer" }}
+                  onClick={() => {
+                    let toggled = !header[3];
+                    setData({
+                      headerArray: edited2DArray(headerArray, i, 3, toggled),
+                      updateRequired: false,
+                    });
+                  }}
+                >
+                  <IconEye />
+                </span>
+              )}
+              {i < headerArray.length - 1 && (
                 <i
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    let result = headersInput.slice();
+                    let result = headerArray.slice();
                     result.splice(i, 1);
-                    setHeadersInput(result);
+                    onUpdate(headersArrayToObject(result));
+                    setData({ headerArray: result, updateRequired: false });
                   }}
                 >
                   <IconCross />
