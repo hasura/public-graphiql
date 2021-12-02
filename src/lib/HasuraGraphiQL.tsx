@@ -45,10 +45,10 @@ export default function HasuraGraphiQL({
   const [explorerVisible, setExplorerVisible] = React.useState(true);
   const [responseTime, setResponseTime] = React.useState<number | null>(null);
   const [responseSize, setResponseSize] = React.useState(0);
+  const [isCached, setIsCached] = React.useState(false);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
   const [resizing, setResizing] = React.useState(false);
-  const [isCached, setIsCached] = React.useState(false);
-
+  
   const { introspecting, schema, error } = useIntrospection(headers, url);
 
   const graphQLFetcher = createGraphiQLFetcher({
