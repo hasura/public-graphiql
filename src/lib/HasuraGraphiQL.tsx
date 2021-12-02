@@ -26,6 +26,7 @@ export default function HasuraGraphiQL({
   graphiQLOptions = {},
   explorerOptions = {},
   customToolbar = null,
+  children = null,
 }: {
   url: string;
   defaultHeaders?: Record<string, string>;
@@ -36,6 +37,7 @@ export default function HasuraGraphiQL({
   graphiQLOptions?: Omit<GraphiQLProps, "fetcher">;
   explorerOptions?: Record<string, any>;
   customToolbar?: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const [query, setQuery] = React.useState<string | undefined>(defaultQuery);
   const [headers, setHeaders] = React.useState(defaultHeaders);
@@ -183,6 +185,7 @@ export default function HasuraGraphiQL({
             headerEditorEnabled={false}
             dangerouslyAssumeSchemaIsValid
           >
+            {children}
             {responseTime ? (
               <GraphiQL.Footer>
                 <div className="graphiql-footer">
@@ -233,3 +236,6 @@ export default function HasuraGraphiQL({
     </div>
   );
 }
+
+export const GraphiQLButton = GraphiQL.Button
+export const GraphiQLToolbar = GraphiQL.Toolbar

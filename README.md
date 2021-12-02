@@ -61,7 +61,16 @@ explorerOptions:ExplorerProps - props to pass through to GraphiQLExplorer compon
 
 customToolbar: React.ReactNode - elements to be shown next to the endpoint input
 
+children: React.ReactNode - nodes to be added as GraphiQL children
+
 All props are optional.
+
+### Exports
+
+HasuraGraphiQL(default) 
+GraphiQL.Button as GraphiQLButton
+GraphiQL.Toolbar as GraphiQLToolbar
+
 
 ## Development
 
