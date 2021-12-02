@@ -1167,6 +1167,11 @@
   width: 130px;
 }
 
+.hasura-graphiql-icon {
+  display: inline;
+  height: 0.75rem;
+}
+
 .graphiql-footer {
   display: flex;
   align-items: center;

@@ -2,7 +2,8 @@ import React from "react";
 
 const IconChevronRight = () => (
   <svg
-    style={{ display: "inline", marginRight: "0.25rem", height: "0.75rem" }}
+  className="hasura-graphiql-icon"
+    style={{ marginRight: "0.25rem"}}
     width="16"
     height="16"
     viewBox="0 0 192 512"
@@ -16,7 +17,8 @@ const IconChevronRight = () => (
 
 const IconChevronDown = () => (
   <svg
-    style={{ display: "inline", marginRight: "0.25rem", height: "0.75rem" }}
+  className="hasura-graphiql-icon"
+    style={{ marginRight: "0.25rem"}}
     width="16"
     height="16"
     viewBox="0 0 320 512"
@@ -30,7 +32,7 @@ const IconChevronDown = () => (
 
 const IconCross = () => (
   <svg
-    style={{ display: "inline", height: "0.75rem" }}
+    className="hasura-graphiql-icon"
     width="12"
     height="12"
     viewBox="0 0 352 512"
@@ -41,7 +43,7 @@ const IconCross = () => (
 
 const IconEye = () => (
   <svg
-    style={{ display: "inline", height: "0.75rem" }}
+  className="hasura-graphiql-icon"
     width="12"
     height="12"
     viewBox="0 0 576 512"
@@ -52,7 +54,7 @@ const IconEye = () => (
 
 const IconInfoCircle = () => (
   <svg
-    style={{ display: "inline", height: "0.75rem" }}
+  className="hasura-graphiql-icon"
     width="12"
     height="12"
     viewBox="0 0 512 512"
@@ -66,7 +68,7 @@ const IconInfoCircle = () => (
 
 const IconCheckCircle = () => (
   <svg
-    style={{ display: "inline", height: "0.75rem" }}
+  className="hasura-graphiql-icon"
     width="12"
     height="12"
     viewBox="0 0 512 512"
