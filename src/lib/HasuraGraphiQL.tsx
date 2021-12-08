@@ -48,7 +48,7 @@ export default function HasuraGraphiQL({
   const [isCached, setIsCached] = React.useState(false);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
   const [resizing, setResizing] = React.useState(false);
-  
+
   const { introspecting, schema, error } = useIntrospection(headers, url);
 
   const graphQLFetcher = createGraphiQLFetcher({
@@ -128,12 +128,7 @@ export default function HasuraGraphiQL({
         />
       </Collapsible>
       <div
-        className="graphiql-container"
-        style={{
-          height: "100vh",
-          border: "thin solid lightgray",
-          borderRadius: "3.5px",
-        }}
+        className="graphiql-container hasura-graphiql-rounded-border"
         onMouseMove={(e) => {
           if (resizing) setExplorerWidth(e.clientX - 20);
         }}
@@ -237,5 +232,5 @@ export default function HasuraGraphiQL({
   );
 }
 
-export const GraphiQLButton = GraphiQL.Button
-export const GraphiQLToolbar = GraphiQL.Toolbar
+export const GraphiQLButton = GraphiQL.Button;
+export const GraphiQLToolbar = GraphiQL.Toolbar;

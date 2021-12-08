@@ -14,14 +14,14 @@ export default function Collapsible({
     <div className="hasura-graphiql-title-holder">
       {collapsed ? (
         <span
-          style={{ cursor: "pointer" }}
+          className="hasura-graphiql-cursor-pointer"
           onClick={() => setCollapsed(!collapsed)}
         >
           <IconChevronRight />
         </span>
       ) : (
         <span
-          style={{ cursor: "pointer" }}
+          className="hasura-graphiql-cursor-pointer"
           onClick={() => setCollapsed(!collapsed)}
         >
           <IconChevronDown />
@@ -34,11 +34,11 @@ export default function Collapsible({
         {title}
       </span>
       <div
-        style={{
-          display: collapsed ? "none" : "flex",
-          marginTop: "16px",
-          marginBottom: "16px",
-        }}
+        className={`hasura-graphiql-collapsible-content ${
+          collapsed
+            ? "hasura-graphiql-panel-collapsed"
+            : "hasura-graphiql-panel"
+        }`}
       >
         {children}
       </div>
