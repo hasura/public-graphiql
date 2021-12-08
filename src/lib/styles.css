@@ -1,0 +1,1296 @@
+#hasura-graphiql-wrapper {
+  margin: 0.5rem;
+  margin-top: 1rem;
+  height: 100%;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  color: rgb(77, 77, 77);
+}
+
+.hasura-graphiql-title-holder {
+  margin-bottom: 16px;
+}
+
+.hasura-graphiql-title {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hasura-graphiql-endpoint-holder {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hasura-graphiql-post-button {
+  -webkit-appearance: none;
+  align-items: center;
+  background-color: rgb(249, 250, 251);
+  background-image: none;
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-left-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-left-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: default;
+  display: flex;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: 600;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgb(77, 77, 77);
+  outline-style: none;
+  outline-width: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 0px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-align: center;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 53.421875px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+}
+
+.hasura-graphiql-endpoint-input {
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: block;
+  flex-basis: 0%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  min-width: 0px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 1220.453125px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+}
+
+.hasura-graphiql-endpoint-input:focus {
+  outline: none;
+}
+
+.hasura-graphiql-relay-holder {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hasura-graphiql-table {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom-color: rgb(209, 213, 219);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-collapse: separate;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(209, 213, 219);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(209, 213, 219);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(209, 213, 219);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-radius: 3.5px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  min-width: 100%;
+  tab-size: 4;
+  text-indent: 0px;
+  min-width: 100%;
+  margin-bottom: 16px;
+}
+
+.hasura-graphiql-table-header-row {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(249, 250, 251);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-row;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
+}
+
+.hasura-graphiql-table-header-col-1 {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(242, 242, 242);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(75, 85, 99);
+  display: table-cell;
+  font-family: "Gudea", sans-serif;
+  font-size: 12.25px;
+  font-weight: 600;
+  height: 31.5px;
+  letter-spacing: 0.612500011920929px;
+  line-height: 17.5px;
+  max-width: 280px;
+  padding-bottom: 7px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: left;
+  text-indent: 0px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 5%;
+}
+
+.hasura-graphiql-table-header-col-2 {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgb(242, 242, 242);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(75, 85, 99);
+  display: table-cell;
+  font-family: "Gudea", sans-serif;
+  font-size: 12.25px;
+  font-weight: 600;
+  height: 31.5px;
+  letter-spacing: 0.612500011920929px;
+  line-height: 17.5px;
+  max-width: 280px;
+  padding-bottom: 7px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: left;
+  text-indent: 0px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 40%;
+}
+
+.hasura-graphiql-table-checkbox:checked {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: none;
+  background-color: rgb(37, 99, 235);
+  background-origin: border-box;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-size: 100% 100%;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgba(0, 0, 0, 0);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgba(0, 0, 0, 0);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgba(0, 0, 0, 0);
+  border-top-left-radius: 3.5px;
+  border-top-right-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(37, 99, 235);
+  cursor: auto;
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 14px;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 4px;
+  outline-color: rgb(37, 99, 235);
+  outline-offset: 2px;
+  outline-style: none;
+  outline-width: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  vertical-align: middle;
+  width: 14px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+}
+
+.hasura-graphiql-table-checkbox {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  background-color: rgb(255, 255, 255);
+  background-origin: border-box;
+  border-bottom-color: rgb(156, 163, 175);
+  border-bottom-left-radius: 3.5px;
+  border-bottom-right-radius: 3.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(156, 163, 175);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(156, 163, 175);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(156, 163, 175);
+  border-top-left-radius: 3.5px;
+  border-top-right-radius: 3.5px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(37, 99, 235);
+  cursor: auto;
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 14px;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 4px;
+  outline-color: rgb(37, 99, 235);
+  outline-offset: 2px;
+  outline-style: none;
+  outline-width: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  vertical-align: middle;
+  width: 14px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+}
+
+.hasura-graphiql-table-cell {
+  border-right-width: 1px;
+  border-color: rgba(229, 231, 235, 1);
+}
+
+.hasura-graphiql-table-input {
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgba(0, 0, 0, 0);
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  width: 100%;
+}
+
+.hasura-graphiql-table-input:focus {
+  outline: none;
+}
+
+.hasura-graphiql-table-cell-cross {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-font-smoothing: antialiased;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 14px;
+  line-height: 14px;
+  margin-right: 14px;
+  tab-size: 4;
+  text-align: right;
+  text-indent: 0px;
+  text-rendering: auto;
+  width: 90%;
+  height: 0.25rem;
+}
+
+.hasura-graphiql-table tr:last-of-type td {
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.hasura-graphiql-table tr:last-of-type input[type="checkbox"] {
+  display: none;
+}
+
+.hasura-graphiql-table tr:last-of-type td:last-of-type {
+  padding-top: 1.2rem;
+}
+
+.hasura-graphiql-table
+  tr:last-of-type
+  .hasura-graphiql-table-cell-cross:last-of-type {
+  width: 100%;
+}
+
+.hasura-graphiql-table-cell-key-entry {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-cell;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  height: 35.5px;
+  line-height: 21px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
+}
+
+.hasura-graphiql-table-cell-key-entry-input {
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  outline-color: rgba(0, 0, 0, 0);
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 100%;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  border: none;
+}
+
+.hasura-graphiql-table-cell-key-entry-input:focus {
+  outline: none;
+}
+
+.hasura-graphiql-table-cell-value-entry {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  display: table-cell;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  height: 35.5px;
+  line-height: 21px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  text-indent: 0px;
+  vertical-align: middle;
+}
+
+.hasura-graphiql-table-cell-value-entry-input {
+  -webkit-appearance: none;
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(107, 114, 128);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-collapse: collapse;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(107, 114, 128);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(107, 114, 128);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(107, 114, 128);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(77, 77, 77);
+  cursor: auto;
+  display: inline-block;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-weight: normal;
+  height: 35px;
+  letter-spacing: normal;
+  line-height: 21px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 7px;
+  padding-left: 10.5px;
+  padding-right: 10.5px;
+  padding-top: 7px;
+  tab-size: 4;
+  text-align: start;
+  text-indent: 0px;
+  text-shadow: none;
+  text-transform: none;
+  width: 100%;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  border: none;
+}
+
+.hasura-graphiql-table-cell-value-entry-input:focus {
+  outline: none;
+}
+
+.hasura-graphiql-notification-wrapper {
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 14px;
+  height: 0px;
+  line-height: 21px;
+  tab-size: 4;
+  width: 1440px;
+}
+
+.hasura-graphiql-notification-tr {
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  bottom: 462px;
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 14px;
+  height: 100px;
+  line-height: 21px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
+  position: fixed;
+  right: 0;
+  tab-size: 4;
+  top: 0px;
+  width: 440px;
+  z-index: 9998;
+}
+
+.hasura-graphiql-notification-inner {
+  -webkit-box-shadow: rgba(236, 61, 61, 0.9) 0px 0px 1px 0px;
+  background-color: rgb(244, 233, 233);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(236, 61, 61);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  box-shadow: rgba(236, 61, 61, 0.9) 0px 0px 1px 0px;
+  box-sizing: border-box;
+  color: rgb(65, 47, 47);
+  cursor: default;
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 13px;
+  height: 80px;
+  line-height: 19.5px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 10px;
+  opacity: 1;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  position: relative;
+  right: 0px;
+  tab-size: 4;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
+  width: 420px;
+  will-change: transform, opacity;
+}
+
+.hasura-graphiql-notification-title {
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(236, 61, 61);
+  cursor: default;
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  height: 15px;
+  line-height: 15.399999618530273px;
+  margin-block-end: 5px;
+  margin-block-start: 0px;
+  margin-bottom: 5px;
+  margin-inline-end: 0px;
+  margin-inline-start: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  width: 400px;
+}
+
+.hasura-graphiql-notification-message {
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(65, 47, 47);
+  cursor: default;
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 13px;
+  height: 38px;
+  line-height: 19.5px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  tab-size: 4;
+  width: 400px;
+}
+
+.hasura-graphiql-notification-dismiss {
+  background-color: rgb(228, 190, 190);
+  border-bottom-color: rgb(229, 231, 235);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(229, 231, 235);
+  border-left-style: solid;
+  border-left-width: 0px;
+  border-right-color: rgb(229, 231, 235);
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-top-color: rgb(229, 231, 235);
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-top-style: solid;
+  border-top-width: 0px;
+  box-sizing: border-box;
+  color: rgb(244, 233, 233);
+  cursor: pointer;
+  display: block;
+  font-family: Arial;
+  font-size: 17px;
+  font-weight: bold;
+  height: 14px;
+  line-height: 15px;
+  position: absolute;
+  right: 5px;
+  tab-size: 4;
+  text-align: center;
+  top: 4px;
+  width: 14px;
+}
+
+.hasura-graphiql-loader {
+  z-index: 100;
+  width: 380px;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.hasura-graphiql-resizer {
+  height: 100%;
+  position: relative;
+  cursor: col-resize;
+  z-index: 100;
+  width: 1px;
+  background-color: rgb(229, 231, 235);
+}
+
+.hasura-graphiql-resize-indicator {
+  height: 100%;
+  width: 4px;
+  position: absolute;
+  background-color: rgb(37, 99, 235);
+  opacity: 0;
+  z-index: 200;
+  content: " ";
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-delay: 0.25s;
+}
+
+.hasura-graphiql-resize-indicator:hover {
+  opacity: 1;
+}
+
+.hasura-graphiql-tooltip {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top {
+  min-width: 200px;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #000000;
+  font-weight: normal;
+  font-size: 12px;
+  border-radius: 3.5px;
+  position: absolute;
+  z-index: 99999999;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.hasura-graphiql-tooltip:hover .hasura-graphiql-top {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top i {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -12px;
+  width: 24px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.hasura-graphiql-tooltip .hasura-graphiql-top i::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
+.graphiql-container {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+}
+
+.hasura-graphiql-rounded-border {
+  border: thin solid lightgray;
+  border-radius: 3.5px;
+}
+
+.hasura-graphiql-switch input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.hasura-graphiql-switch label {
+  text-indent: 3rem;
+  cursor: pointer;
+  width: 3rem;
+  height: 1.5rem;
+  background: grey;
+  display: block;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.hasura-graphiql-switch label:after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: #fff;
+  border-radius: 1.4rem;
+}
+
+.hasura-graphiql-switch input:checked + label {
+  background: #1eb4d4;
+}
+
+.hasura-graphiql-switch input:checked + label:after {
+  left: calc(100% - 1px);
+  transform: translateX(-100%);
+}
+
+.hasura-graphiql-switch label:active:after {
+  width: 130px;
+}
+
+.hasura-graphiql-icon {
+  display: inline;
+  height: 0.75rem;
+}
+
+.graphiql-footer {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+  background: #eee;
+  z-index: 100;
+}
+
+.graphiql-footer-label {
+  font-size: 10px;
+  color: #777777;
+  font-weight: 600;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+.graphiql-footer-value {
+  margin-right: 16px;
+  font-size: 13px;
+}
+
+.graphiql-explorer-actions > select {
+  color: rgb(119, 119, 119);
+  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
+    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
+  font-variant-caps: normal;
+  font-weight: 400;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 32px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+.graphiql-explorer-actions > select:focus {
+  border: 1px solid rgb(251, 191, 36) !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
+    rgb(253, 230, 138) 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+/* Fixes footer spacing */
+.graphiql-explorer-actions > span {
+  font-family: system, -apple-system, "San Francisco", ".SFNSDisplay-Regular",
+    "Helvetica Neue", helvetica, "Lucida Grande", arial, sans-serif;
+  font-variant-caps: normal;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  color: rgb(119, 119, 119);
+}
+
+.graphiql-explorer-actions {
+  margin: 4px 0px 0px -8px !important;
+  /* width: calc(100% + 6px) !important; */
+  padding: 10px !important;
+  padding-top: 0 !important;
+  padding-bottom: 5px !important;
+  height: 53px;
+}
+
+.graphiql-explorer-root > div:nth-child(2) {
+  max-height: none !important;
+  min-height: 53px !important;
+}
+
+.graphiql-container button[title="Prettify Query (Shift-Ctrl-P)"] {
+  order: 0;
+}
+
+.graphiql-container button[title="Merge Query (Shift-Ctrl-M)"] {
+  order: 10;
+}
+
+.graphiql-container button[title="Copy Query (Shift-Ctrl-C)"] {
+  order: 10;
+}
+
+.graphiql-container button[title="Show History"] {
+  order: 1;
+}
+
+.graphiql-container button[title="Toggle Explorer"] {
+  order: 2;
+}
+
+.graphiql-container button[title="Toggle Code Exporter"] {
+  order: 3;
+}
+
+.graphiql-container button[title="Cache the response of this query"] {
+  order: 2;
+}
+
+.hasura-graphiql-cursor-pointer {
+  cursor: pointer;
+}
+
+.hasura-graphiql-collapsible-content {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.hasura-graphiql-panel {
+  display: flex;
+}
+
+.hasura-graphiql-panel-collapsed {
+  display: none;
+}
