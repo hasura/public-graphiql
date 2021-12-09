@@ -1,4 +1,3 @@
-
 /* ** GraphiQL CSS tweaks to fix compatibility */
 /* Input fixes from Tailwind */
 .graphiql-container input,
@@ -82,4 +81,5 @@
 
 .graphiql-container .topBar {
   padding: 24px;
+  padding-bottom: 23px;
 }
