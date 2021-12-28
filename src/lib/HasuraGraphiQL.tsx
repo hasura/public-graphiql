@@ -5,7 +5,7 @@ import CodeExporter from "graphiql-code-exporter";
 import snippets from "./snippets";
 import { createGraphiQLFetcher } from "@graphiql/toolkit";
 import { createClient } from "graphql-ws";
-import { toggleCacheDirective } from "./utils";
+import { toggleCacheDirective, emptify, isValid } from "./utils";
 import { IconInfoCircle, IconCheckCircle } from "./Icons";
 import Spinner from "./Spinner";
 import Collapsible from "./Collapsible";
@@ -48,7 +48,11 @@ export default function HasuraGraphiQL({
   const [isCached, setIsCached] = React.useState(false);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
   const [resizing, setResizing] = React.useState(false);
-  const [flashMessage, setFlashMessage] = React.useState<string | null>(null);
+  const [flashMessage, setFlashMessage] = React.useState<Record<
+    string,
+    any
+  > | null>(null);
+  const [variables, setVariables] = React.useState(defaultVariables);
 
   const { introspecting, schema, error } = useIntrospection(headers, url);
 
@@ -94,7 +98,22 @@ export default function HasuraGraphiQL({
       {
         label: "Share",
         title: "Create Shareable URL",
-        onClick: () => setFlashMessage("GraphQL API URL generated and copied to clipboard successfully!"),
+        onClick: () => {
+          if (isValid(variables))
+            setFlashMessage({
+              title: "Share GraphQL API",
+              body: `GraphQL API URL generated and copied to clipboard successfully! &variables=${JSON.stringify(
+                emptify(JSON.parse(variables))
+              )}&query=${query}`,
+              type: "success",
+            });
+          else
+            setFlashMessage({
+              title: "Error parsing JSON",
+              body: `Variables input is invalid `,
+              type: "error",
+            });
+        },
       },
     ];
     if (isCloud)
@@ -110,8 +129,17 @@ export default function HasuraGraphiQL({
 
   return (
     <div id="hasura-graphiql-wrapper">
-      {error && <Notification title="Schema Introspection Error" message={error} />}
-      {flashMessage && <Notification title="Share GraphQL API" message={flashMessage} info />}
+      {error && (
+        <Notification title="Schema Introspection Error" message={error} />
+      )}
+      {flashMessage && (
+        <Notification
+          title={flashMessage.title}
+          message={flashMessage.body}
+          info={flashMessage.type === "success"}
+          onDismiss={() => setFlashMessage(null)}
+        />
+      )}
       <Collapsible title="GraphQL Endpoint">
         <div className="hasura-graphiql-endpoint-holder">
           <button type="button" className="hasura-graphiql-post-button">
@@ -186,6 +214,7 @@ export default function HasuraGraphiQL({
             {...graphiQLOptions}
             headerEditorEnabled={false}
             dangerouslyAssumeSchemaIsValid
+            onEditVariables={setVariables}
           >
             {children}
             {responseTime ? (

@@ -88,3 +88,26 @@ export function debounce(fn: Function, delay: number) {
     timeout = setTimeout(() => fn(...args), delay);
   };
 }
+
+export function emptify(o: Record<string, any>) {
+  let res: Record<string, any> = {};
+  for (let [key, val] of Object.entries(o)) {
+    if (typeof val === "number") res[key] = 0;
+    else if (typeof val === "string") res[key] = "";
+    else if (Array.isArray(val)) res[key] = [];
+    else if (typeof val === "object" && val !== null && val !== undefined)
+      res[key] = emptify(val);
+    else res[key] = null;
+  }
+  return res;
+}
+
+export function isValid(json: string) {
+  let valid = true;
+  try {
+    JSON.parse(json);
+  } catch (e) {
+    valid = false;
+  }
+  return valid;
+}

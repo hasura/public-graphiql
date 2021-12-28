@@ -4,10 +4,12 @@ export default function Notification({
   message,
   title,
   info = false,
+  onDismiss = () => null,
 }: {
   message: string;
-  title:string;
+  title: string;
   info?: boolean;
+  onDismiss?: VoidFunction;
 }) {
   const [visible, setVisible] = React.useState(true);
   if (!visible) return null;
@@ -19,13 +21,14 @@ export default function Notification({
     >
       <div className="hasura-graphiql-notification-tr">
         <div className="hasura-graphiql-notification-inner">
-          <h4 className="hasura-graphiql-notification-title">
-            {title}
-          </h4>
+          <h4 className="hasura-graphiql-notification-title">{title}</h4>
           <div className="hasura-graphiql-notification-message">{message}</div>
           <span
             className="hasura-graphiql-notification-dismiss"
-            onClick={() => setVisible(false)}
+            onClick={() => {
+              setVisible(false);
+              onDismiss();
+            }}
           >
             ×
           </span>
