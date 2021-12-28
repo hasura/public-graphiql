@@ -9,7 +9,7 @@ import { toggleCacheDirective } from "./utils";
 import { IconInfoCircle, IconCheckCircle } from "./Icons";
 import Spinner from "./Spinner";
 import Collapsible from "./Collapsible";
-import ErrorNotification from "./ErrorNotification";
+import Notification from "./Notification";
 import HeaderEditor from "./HeaderEditor";
 import useIntrospection from "./useIntrospection";
 import "graphiql/graphiql.css";
@@ -48,6 +48,7 @@ export default function HasuraGraphiQL({
   const [isCached, setIsCached] = React.useState(false);
   const [explorerWidth, setExplorerWidth] = React.useState(300);
   const [resizing, setResizing] = React.useState(false);
+  const [flashMessage, setFlashMessage] = React.useState<string | null>(null);
 
   const { introspecting, schema, error } = useIntrospection(headers, url);
 
@@ -90,6 +91,11 @@ export default function HasuraGraphiQL({
         title: "Toggle Code Exporter",
         onClick: () => setCodeExporterVisible(!codeExporterVisible),
       },
+      {
+        label: "Share",
+        title: "Create Shareable URL",
+        onClick: () => setFlashMessage("GraphQL API URL generated and copied to clipboard successfully!"),
+      },
     ];
     if (isCloud)
       buttons.push({
@@ -104,7 +110,8 @@ export default function HasuraGraphiQL({
 
   return (
     <div id="hasura-graphiql-wrapper">
-      {error && <ErrorNotification message={error} />}
+      {error && <Notification title="Schema Introspection Error" message={error} />}
+      {flashMessage && <Notification title="Share GraphQL API" message={flashMessage} info />}
       <Collapsible title="GraphQL Endpoint">
         <div className="hasura-graphiql-endpoint-holder">
           <button type="button" className="hasura-graphiql-post-button">
@@ -117,8 +124,8 @@ export default function HasuraGraphiQL({
             className="hasura-graphiql-endpoint-input"
             value={url}
           />
+          {customToolbar}
         </div>
-        {customToolbar}
       </Collapsible>
       <Collapsible title="Request Headers">
         <HeaderEditor

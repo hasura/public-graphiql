@@ -856,6 +856,24 @@
   z-index: 9998;
 }
 
+.hasura-graphiql-notification-info .hasura-graphiql-notification-inner {
+  -webkit-box-shadow: rgba(94, 164, 0, 0.9) 0px 0px 1px 0px;
+  box-shadow: rgba(94, 164, 0, 0.9) 0px 0px 1px 0px;
+  border-top-color: rgb(94, 164, 0);
+  background-color: rgb(240, 245, 234);
+  border-bottom-color: rgb(226, 232, 240);
+}
+
+.hasura-graphiql-notification-info .hasura-graphiql-notification-title {
+  color: rgb(94, 164, 0);
+}
+
+.hasura-graphiql-notification-info .hasura-graphiql-notification-dismiss {
+  background-color: rgba(94, 164, 0, 0.3);
+  border-bottom-color: rgba(94, 164, 0, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .hasura-graphiql-notification-inner {
   -webkit-box-shadow: rgba(236, 61, 61, 0.9) 0px 0px 1px 0px;
   background-color: rgb(244, 233, 233);
@@ -1271,11 +1289,15 @@
 }
 
 .graphiql-container button[title="Toggle Code Exporter"] {
-  order: 3;
+  order: 4;
 }
 
 .graphiql-container button[title="Cache the response of this query"] {
   order: 2;
+}
+
+.graphiql-container button[title="Create Shareable URL"] {
+  order: 3;
 }
 
 .hasura-graphiql-cursor-pointer {

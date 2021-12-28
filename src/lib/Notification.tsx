@@ -1,18 +1,26 @@
 import * as React from "react";
 
-export default function ErrorNotification({
+export default function Notification({
   message,
+  title,
+  info = false,
 }: {
   message: string;
+  title:string;
+  info?: boolean;
 }) {
   const [visible, setVisible] = React.useState(true);
   if (!visible) return null;
   return (
-    <div className="hasura-graphiql-notifications-wrapper">
+    <div
+      className={`hasura-graphiql-notifications-wrapper ${
+        info ? "hasura-graphiql-notification-info" : ""
+      }`}
+    >
       <div className="hasura-graphiql-notification-tr">
         <div className="hasura-graphiql-notification-inner">
           <h4 className="hasura-graphiql-notification-title">
-            Schema Introspection Error
+            {title}
           </h4>
           <div className="hasura-graphiql-notification-message">{message}</div>
           <span
