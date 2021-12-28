@@ -99,15 +99,20 @@ export default function HasuraGraphiQL({
         label: "Share",
         title: "Create Shareable URL",
         onClick: () => {
-          if (isValid(variables))
+          if (isValid(variables)) {
+            var url = new URL(window.location.href);
+            url.searchParams.append(
+              "variables",
+              JSON.stringify(emptify(JSON.parse(variables)))
+            );
+            if (query) url.searchParams.append("query", query);
+            navigator.clipboard.writeText(url.toString());
             setFlashMessage({
               title: "Share GraphQL API",
-              body: `GraphQL API URL generated and copied to clipboard successfully! &variables=${JSON.stringify(
-                emptify(JSON.parse(variables))
-              )}&query=${query}`,
+              body: `GraphQL API URL generated and copied to clipboard successfully!`,
               type: "success",
             });
-          else
+          } else
             setFlashMessage({
               title: "Error parsing JSON",
               body: `Variables input is invalid `,
