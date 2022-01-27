@@ -99,12 +99,13 @@ export default function HasuraGraphiQL({
         label: "Share",
         title: "Create Shareable URL",
         onClick: () => {
-          if (isValid(variables)) {
+          if (variables.length === 0 || isValid(variables)) {
             var url = new URL(window.location.href);
-            url.searchParams.append(
-              "variables",
-              JSON.stringify(emptify(JSON.parse(variables)))
-            );
+            if (variables.length)
+              url.searchParams.append(
+                "variables",
+                JSON.stringify(emptify(JSON.parse(variables)))
+              );
             if (query) url.searchParams.append("query", query);
             navigator.clipboard.writeText(url.toString());
             setFlashMessage({
