@@ -102,11 +102,11 @@ export default function HasuraGraphiQL({
           if (variables.length === 0 || isValid(variables)) {
             var url = new URL(window.location.href);
             if (variables.length)
-              url.searchParams.append(
+              url.searchParams.set(
                 "variables",
                 JSON.stringify(emptify(JSON.parse(variables)))
               );
-            if (query) url.searchParams.append("query", query);
+            if (query) url.searchParams.set("query", query);
             navigator.clipboard.writeText(url.toString());
             setFlashMessage({
               title: "Share GraphQL API",
